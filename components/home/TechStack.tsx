@@ -160,7 +160,7 @@ export const TechStack: React.FC = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-6 md:px-16 lg:px-24 relative z-10 space-y-12">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-purple-500/20 pb-8">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8">
           <div className="space-y-3">
             <div className="flex items-center gap-2">
               <div className="w-8 h-[2px] bg-purple-400" />
@@ -183,7 +183,7 @@ export const TechStack: React.FC = () => {
         <div className="absolute top-0 bottom-0 left-0 w-24 bg-gradient-to-r from-[#120524] to-transparent z-20 pointer-events-none" />
         <div className="absolute top-0 bottom-0 right-0 w-24 bg-gradient-to-l from-[#120524] to-transparent z-20 pointer-events-none" />
 
-        <div className="flex overflow-hidden select-none">
+        <div className="flex overflow-hidden  p-2 select-none">
           <motion.div
             animate={{ x: ['0%', '-50%'] }}
             transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
@@ -197,7 +197,7 @@ export const TechStack: React.FC = () => {
         </div>
 
 
-        <div className="flex overflow-hidden select-none">
+        <div className="flex overflow-hidden p-2 select-none">
           <motion.div
             animate={{ x: ['-50%', '0%'] }}
             transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}

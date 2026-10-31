@@ -22,7 +22,7 @@ export const teamMembers: TeamMember[] = [
     id: 'ramit',
     name: 'Ramit Neupane',
     role: 'Founder & CEO',
-    image: '/team/founder.webp', 
+    image: '/team/founder.webp',
     description: 'Visionary leader driving the strategic direction, business growth, and overall corporate innovation at Cornor Tech.',
     skills: ['Leadership', 'Business Strategy', 'Innovation'],
     socials: {
@@ -44,19 +44,7 @@ export const teamMembers: TeamMember[] = [
       x: 'https://x.com/santoshkunwar',
     },
   },
-  {
-    id: 'rubi',
-    name: 'Rubi Ale',
-    role: 'Marketing Head',
-    image: '/team/mh.webp',
-    description: 'Directs market positioning, brand identity expansion, and targeted digital acquisition campaigns to elevate client reach.',
-    skills: ['Digital Marketing', 'Brand Strategy', 'Market Research'],
-    socials: {
-      linkedin: 'https://linkedin.com/in/rubi-ale',
-      github: 'https://github.com/rubiale',
-      x: 'https://x.com/rubiale',
-    },
-  },
+
   {
     id: 'laxman',
     name: 'Laxman Neupane',
@@ -83,6 +71,19 @@ export const teamMembers: TeamMember[] = [
       x: 'https://x.com/amanpokhrel',
     },
   },
+  {
+    id: 'rubi',
+    name: 'Rubi Ale',
+    role: 'Marketing Head',
+    image: '/team/mh.webp',
+    description: 'Directs market positioning, brand identity expansion, and targeted digital acquisition campaigns to elevate client reach.',
+    skills: ['Digital Marketing', 'Brand Strategy', 'Market Research'],
+    socials: {
+      linkedin: 'https://linkedin.com/in/rubi-ale',
+      github: 'https://github.com/rubiale',
+      x: 'https://x.com/rubiale',
+    },
+  },
 ];
 
 interface MemberCardProps {
@@ -92,7 +93,7 @@ interface MemberCardProps {
 const MemberCard: React.FC<MemberCardProps> = ({ member }) => {
   return (
     <div className="group bg-white rounded-3xl border border-purple-100/80 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col overflow-hidden h-full">
-  
+
       <div className="bg-gradient-to-b from-[#f3eeff] to-[#e8ddff] pt-8 pb-6 px-4 flex items-center justify-center relative">
         <div className="relative w-46 h-46 rounded-full overflow-hidden border-4 border-white shadow-md group-hover:scale-105 transition-transform duration-300">
           <Image
@@ -105,7 +106,7 @@ const MemberCard: React.FC<MemberCardProps> = ({ member }) => {
         </div>
       </div>
 
-   
+
       <div className="p-6 flex flex-col flex-grow text-center bg-white">
         <h3 className="text-xl font-bold text-slate-900 group-hover:text-purple-600 transition-colors">
           {member.name}
@@ -131,7 +132,7 @@ const MemberCard: React.FC<MemberCardProps> = ({ member }) => {
 
 
         <div className="flex items-center justify-center gap-3 pt-4 border-t border-slate-100">
-    
+
           {member.socials.linkedin && (
             <a
               href={member.socials.linkedin}
@@ -146,7 +147,7 @@ const MemberCard: React.FC<MemberCardProps> = ({ member }) => {
             </a>
           )}
 
-   
+
           {member.socials.github && (
             <a
               href={member.socials.github}
@@ -161,7 +162,7 @@ const MemberCard: React.FC<MemberCardProps> = ({ member }) => {
             </a>
           )}
 
-   
+
           {member.socials.x && (
             <a
               href={member.socials.x}
@@ -182,41 +183,40 @@ const MemberCard: React.FC<MemberCardProps> = ({ member }) => {
 };
 
 export const LeadershipTeam: React.FC = () => {
-  const topRow = teamMembers.slice(0, 2); 
-  const centerMember = teamMembers[2];   
-  const bottomRow = teamMembers.slice(3, 5); 
+  const firstRow = teamMembers.slice(0, 2);
+  const secondRow = teamMembers.slice(2, 5);
 
   return (
     <section className="w-full bg-[#faf9fe] py-20 px-6 md:px-16 lg:px-24">
-      <div className="max-w-6xl mx-auto space-y-12">
+      <div className="max-w-7xl mx-auto space-y-12">
 
+        {/* Section Heading */}
         <div className="text-center space-y-3">
           <h2 className="text-3xl md:text-4xl font-extrabold text-[#1a1033] tracking-tight">
             Leadership Team
           </h2>
+
           <p className="text-slate-500 text-sm md:text-base max-w-lg mx-auto">
             Meet the talented individuals driving innovation and success at Cornor Tech.
           </p>
         </div>
 
         <div className="space-y-8">
-  
+
+          {/* First Row: 2 Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {topRow.map((member) => (
+            {firstRow.map((member) => (
               <MemberCard key={member.id} member={member} />
             ))}
           </div>
 
-
-          <div className="max-w-md mx-auto">
-            <MemberCard member={centerMember} />
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {bottomRow.map((member) => (
+          {/* Second Row: 3 Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {secondRow.map((member) => (
               <MemberCard key={member.id} member={member} />
             ))}
           </div>
+
         </div>
       </div>
     </section>
@@ -224,3 +224,4 @@ export const LeadershipTeam: React.FC = () => {
 };
 
 export default LeadershipTeam;
+

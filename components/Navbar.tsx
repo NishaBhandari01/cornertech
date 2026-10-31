@@ -1,26 +1,32 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import { usePathname, useRouter } from "next/navigation";
 
 interface NavItem {
     label: string;
     href: string;
+    id: string;
 }
 
 const navItems: NavItem[] = [
-    { label: 'Home', href: '/' },
-    { label: 'Services', href: '/services' },
-    { label: 'About Us', href: '/about' },
-    { label: 'Our Works', href: '/works' },
-    { label: 'Products', href: '/products' },
-    { label: 'Career', href: '/career' },
+    { label: 'Home', href: '/', id: "home" },
+    { label: 'Services', href: '/#service', id: "services" },
+    { label: 'About Us', href: '/#about', id: "about" },
+    { label: 'Our Works', href: '/#our_works', id: "works" },
+    { label: 'Products', href: '/products', id: "products" },
+    { label: 'Career', href: '/career', id: "career" },
 ];
 
 export const Navbar: React.FC = () => {
     const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const pathname = usePathname();
+    const router = useRouter();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -33,6 +39,30 @@ export const Navbar: React.FC = () => {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
+
+
+    const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+        setMobileMenuOpen(false);
+
+        if (href.startsWith('/#')) {
+            const targetId = href.substring(2); // remove '/#'
+            
+            if (pathname === '/') {
+                e.preventDefault();
+                const element = document.getElementById(targetId);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            } else {
+                router.push(href);
+            }
+        } else if (href === '/') {
+            if (pathname === '/') {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+    };
 
     return (
         <motion.header
@@ -47,15 +77,16 @@ export const Navbar: React.FC = () => {
         >
             <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between">
 
+
                 <Link href="/" className="flex items-center gap-3 group">
                     <motion.div
                         whileHover={{ scale: 1.05, rotate: 3 }}
                         transition={{ type: 'spring', stiffness: 400, damping: 15 }}
                         className="relative w-11 h-11 flex items-center justify-center"
                     >
-                        <div className="absolute inset-0 bg-purple-600/30 rounded-xl blur-md group-hover:bg-purple-500/40    0 transition-all" />
+                        <div className="absolute inset-0 bg-purple-600/30 rounded-xl blur-md group-hover:bg-purple-500/40 transition-all" />
                         <Image
-                            src="/logo.png" 
+                            src="/logo.png"
                             alt="Cornor Tech Logo"
                             width={44}
                             height={44}
@@ -68,29 +99,28 @@ export const Navbar: React.FC = () => {
                     </span>
                 </Link>
 
-        
-                <nav className="hidden lg:flex items-center gap-1 bg-white/[0.03] border border-white/10 px-4 py-1.5 rounded-full backdrop-blur-sm shadow-inner">
+
+                <nav className="hidden lg:flex items-center gap-1 backdrop-blur-sm rounded-xl shadow-inner">
                     {navItems.map((item) => (
                         <Link
-                            key={item.label}
+                            key={item.id}
                             href={item.href}
-                            className="relative px-4 py-2 text-sm font-medium text-purple-100/80 hover:text-[#FBD384] transition-colors group"
+                            onClick={(e) => handleNavClick(e, item.href)}
+                            className={`relative px-4 py-2 font-medium rounded-t transition-all group ${
+                                pathname === item.href
+                                    ? "text-violet-400"
+                                    : "text-purple-100 hover:text-white"
+                            }`}
                         >
                             {item.label}
-        
-                            <motion.div
-                                className="absolute inset-0 bg-gradient-to-r from-purple-600/40 to-violet-600/40 rounded-full -z-10 opacity-0 group-hover:opacity-100 transition-opacity"
-                                layoutId="nav-pill"
-                                transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                            />
                         </Link>
                     ))}
                 </nav>
 
-      
+
                 <div className="flex items-center gap-3">
-                    <div className="hidden sm:flex items-center gap-4 pl-2 border-l border-white/10">
-    
+                    <div className="hidden sm:flex items-center gap-4 pl-2 border-white/10">
+                        {/* Social Icons */}
                         <motion.a
                             href="https://facebook.com"
                             target="_blank"
@@ -105,7 +135,6 @@ export const Navbar: React.FC = () => {
                             </svg>
                         </motion.a>
 
- 
                         <motion.a
                             href="https://instagram.com"
                             target="_blank"
@@ -119,7 +148,6 @@ export const Navbar: React.FC = () => {
                                 <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
                             </svg>
                         </motion.a>
-
 
                         <motion.a
                             href="https://linkedin.com"
@@ -136,10 +164,9 @@ export const Navbar: React.FC = () => {
                         </motion.a>
                     </div>
 
-  
                     <button
                         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                        className="lg:hidden p-2.5 rounded-xl bg-white/5 border border-white/10 text-white focus:outline-none hover:bg-white/10 transition-colors"
+                        className="lg:hidden p-2.5 rounded-xl bg-white/5 text-white focus:outline-none hover:bg-white/10 transition-colors"
                         aria-label="Toggle Menu"
                     >
                         {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -159,16 +186,20 @@ export const Navbar: React.FC = () => {
                         <div className="flex flex-col gap-2">
                             {navItems.map((item) => (
                                 <Link
-                                    key={item.label}
+                                    key={item.id}
                                     href={item.href}
-                                    onClick={() => setMobileMenuOpen(false)}
-                                    className="text-base font-medium text-purple-200 hover:text-white hover:bg-purple-600/20 px-4 py-3 rounded-xl transition-colors"
+                                    onClick={(e) => handleNavClick(e, item.href)}
+                                    className={`relative px-4 py-2 font-medium rounded-lg transition-all group ${
+                                        pathname === item.href
+                                            ? "text-violet-400 bg-purple-950/40"
+                                            : "text-purple-100 hover:text-white hover:bg-white/5"
+                                    }`}
                                 >
                                     {item.label}
                                 </Link>
                             ))}
 
-                            <div className="flex items-center gap-4 pt-4 mt-3 border-t border-white/10 justify-center">
+                            <div className="flex items-center gap-4 pt-4 mt-2 border-t border-white/10 justify-center">
                                 <a href="https://facebook.com" target="_blank" rel="noreferrer" className="p-2.5 rounded-full bg-white/5 text-purple-200 hover:text-white border border-white/10" aria-label="Facebook">
                                     <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
                                         <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />

@@ -57,7 +57,7 @@ const dashainCards = [
 export const DashainBanner: React.FC = () => {
 
     return (
-        <section className="relative w-full bg-[#120524] text-white overflow-hidden py-16 px-4 sm:px-8 lg:px-16 border-y border-[#d76c24]" >
+        <section className="relative w-full bg-[#120524] text-white overflow-hidden pt-16 px-4 sm:px-8 lg:px-16 " >
             <div className="absolute top-0 inset-x-0 flex justify-between items-start pointer-events-none z-20 px-2 sm:px-6">
                 {[...Array(16)].map((_, i) => (
                     <motion.div
@@ -198,7 +198,7 @@ export const DashainBanner: React.FC = () => {
                 </motion.button>
             </div>
 
-            <div className="mt-14 -mx-4 sm:-mx-8 lg:-mx-16 pt-3 pb-3 bg-purple-950/70 border-t border-purple-500/20 overflow-hidden flex whitespace-nowrap">
+            <div className="mt-14  sm:-mx-8 lg:-mx-16 py-3  bg-purple-950/70 border-t border-purple-500/20 overflow-hidden flex whitespace-nowrap">
                 <motion.div
                     animate={{ x: ['0%', '-50%'] }}
                     transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}

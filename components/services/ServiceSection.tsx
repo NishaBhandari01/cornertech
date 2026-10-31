@@ -1,16 +1,9 @@
 
-
 "use client"
-
-
-
-
-
 
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-    Sparkles,
     ChevronRight,
     Code2,
     Megaphone,
@@ -21,10 +14,8 @@ import {
     ShoppingCart,
     HandHelping,
     CheckCircle2,
-    Zap,
     ArrowRight,
-    Pause,
-    Play,
+
 } from "lucide-react";
 import Image from "next/image";
 
@@ -187,12 +178,9 @@ const serviceColors = [
 export default function ServicesShowcase() {
     const [activeIndex, setActiveIndex] = useState(0);
     const [isPlaying, setIsPlaying] = useState(true);
-    const timerRef = useRef<ReturnType<typeof setInterval> | null>(
-        null
-    );
+    const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
     const activeService = servicesData[activeIndex];
-    const ActiveIcon = serviceIcons[activeService.id];
 
     useEffect(() => {
         if (!isPlaying) return;
@@ -211,7 +199,7 @@ export default function ServicesShowcase() {
     };
 
     return (
-        <section className="relative isolate overflow-hidden border-y border-purple-500/20  px-4 py-16 text-white sm:px-6 sm:py-20 lg:px-12 lg:py-24">
+        <section id="service" className="relative isolate overflow-hidden border-y border-purple-500/20  px-4 py-16 text-white sm:px-6 sm:py-20 lg:px-12 lg:py-24">
             <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 opacity-30"  style={{ backgroundImage:"radial-gradient(rgba(168,85,247,0.3) 1px, transparent 1px)",  backgroundSize: "28px 28px" }}/>
 
             <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-20 -z-10 -translate-x-1/2 select-none whitespace-nowrap text-[17vw] font-black tracking-widest text-white/[0.025]">
@@ -411,8 +399,6 @@ export default function ServicesShowcase() {
                                 />
                             ))}
                         </div>
-
-
                     </div>
                 </div>
             </div>

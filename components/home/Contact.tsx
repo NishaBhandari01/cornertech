@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Mail, MapPin, ChevronUp, Loader2, ArrowRight, Phone } from 'lucide-react';
+import { Mail, MapPin, Loader2, ArrowRight, Phone } from 'lucide-react';
 import { motion, Variants } from "framer-motion";
 import Image from 'next/image';
 
@@ -56,10 +56,6 @@ export default function Contact() {
         }
     };
 
-    const scrollToTop = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
-
     const containerVariants: Variants = {
         hidden: { opacity: 0 },
         visible: {
@@ -81,85 +77,83 @@ export default function Contact() {
     };
 
     return (
-        <div className="bg-[#120524] text-purple-100 overflow-hidden pt-24">
-
-            <section className="relative py-16 px-6 lg:px-16 min-h-[85vh] flex items-center justify-center">
+        <div className=" text-purple-100 overflow-hidden pt-12 pb-20 relative font-sans selection:bg-purple-600 selection:text-white">
+            <div
+                className="absolute inset-0 pointer-events-none opacity-20 z-0"
+                style={{
+                    backgroundImage: 'radial-gradient(rgba(192, 132, 252, 0.35) 1px, transparent 1px)',
+                    backgroundSize: '28px 28px'
+                }}
+            />
+            <section className="relative py-8 px-4 sm:px-6 lg:px-20 max-w-7xl mx-auto z-10">
                 <motion.div
                     variants={containerVariants}
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, margin: "-100px" }}
-                    className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
+                    className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center"
                 >
-
-                    <motion.div variants={itemVariants} className="space-y-6">
-
-                        <div className="space-y-3">
-
-                            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white">
-                                Fill <span className="bg-gradient-to-r from-purple-400 via-violet-300 to-indigo-400 bg-clip-text text-transparent">Contact Form</span>
+                    <motion.div variants={itemVariants} className="lg:col-span-5 space-y-8">
+                        <div className="space-y-4">
+                     
+                            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
+                                Let's Build <br />
+                                <span className="bg-violet-400 bg-clip-text text-transparent">
+                                    Something Great
+                                </span>
                             </h2>
-                            <p className='text-xl text-gray-500'> or</p>
 
-
-                            <div className="inline-flex items-center  text-purple-300 text-sm font-medium tracking-wide ">
-                                Choose your preferred way to reach us
-                            </div>
+                            <p className="text-purple-200/80 text-sm sm:text-base leading-relaxed">
+                                Have a project in mind or want to learn more about our services? Choose your preferred way to reach out or fill out the contact form.
+                            </p>
                         </div>
 
                         <div className="space-y-4 pt-2">
-                            <motion.div whileHover={{ x: 5 }} transition={{ type: "spring", stiffness: 300 }} className="flex items-center space-x-4">
-                                <div className="w-11 h-11 rounded-xl bg-purple-950/60 border border-purple-500/20 flex items-center justify-center text-purple-300 shadow-md">
-                                    <Mail className="w-5 h-5 text-purple-400" />
+                            <motion.div whileHover={{ x: 5 }} transition={{ type: "spring", stiffness: 300 }} className="flex items-center space-x-4  p-4 rounded-2xl shadow-lg">
+                                <div className="w-11 h-11 rounded-xl  border border-purple-500/30 flex items-center justify-center text-white shadow-inner shrink-0">
+                                    <Mail className="w-5 h-5" />
                                 </div>
-                                <div>
-                                    <span className='block text-purple-300'>Email</span>
+                                <div className="overflow-hidden">
+                                    <span className="block text-xs font-semibold text-purple-300 uppercase tracking-wider">Email Us</span>
                                     <a
                                         href="mailto:info@cornortech.com"
-                                        className="inline-flex items-center gap-2 rounded-lg  text-white hover:text-white transition-colors font-medium text-sm md:text-base"
+                                        className="text-white hover:text-amber-300 transition-colors font-medium text-sm sm:text-base truncate block"
                                     >
                                         info@cornortech.com
                                     </a>
-
                                 </div>
-
                             </motion.div>
 
-                            <motion.div whileHover={{ x: 5 }} transition={{ type: "spring", stiffness: 300 }} className="flex items-center space-x-4">
-                                <div className="w-11 h-11 rounded-xl bg-purple-950/60 border border-purple-500/20 flex items-center justify-center text-purple-300 shadow-md">
-                                    <Phone className="w-5 h-5 text-purple-400" />
+                            <motion.div whileHover={{ x: 5 }} transition={{ type: "spring", stiffness: 300 }} className="flex items-center space-x-4  p-4 rounded-2xl shadow-lg">
+                                <div className="w-11 h-11 rounded-xl border border-purple-500/30 flex items-center justify-center text-white shadow-inner shrink-0">
+                                    <Phone className="w-5 h-5" />
                                 </div>
-
-                                <div>
-                                    <span className='block text-purple-300'>Phone</span>
+                                <div className="overflow-hidden">
+                                    <span className="block text-xs font-semibold text-purple-300 uppercase tracking-wider">Call Us</span>
                                     <a
                                         href="tel:+9779828750115"
-                                        className="inline-flex items-center gap-2 rounded-lg  text-white hover:text-white transition-colors font-medium text-sm md:text-base"
+                                        className="text-white hover:text-amber-300 transition-colors font-medium text-sm sm:text-base truncate block"
                                     >
                                         +977 9828750115
                                     </a>
                                 </div>
-
                             </motion.div>
 
-                            <motion.div whileHover={{ x: 5 }} transition={{ type: "spring", stiffness: 300 }} className="flex items-center space-x-4">
-                                <div className="w-11 h-11 rounded-xl bg-purple-950/60 border border-purple-500/20 flex items-center justify-center text-purple-300 shadow-md">
-                                    <MapPin className="w-5 h-5 text-purple-400" />
+                            <motion.div whileHover={{ x: 5 }} transition={{ type: "spring", stiffness: 300 }} className="flex items-center space-x-4  p-4 rounded-2xl shadow-lg">
+                                <div className="w-11 h-11 rounded-xl  border border-purple-500/30 flex items-center justify-center text-white shadow-inner shrink-0">
+                                    <MapPin className="w-5 h-5" />
                                 </div>
-                                <div>
-                                    <span className='block text-purple-300'>Location</span>
-                                    <span className="text-purple-200/90 text-sm md:text-base font-medium">Tilottama, Butwal, Nepal</span>
+                                <div className="overflow-hidden">
+                                    <span className="block text-xs font-semibold text-purple-300 uppercase tracking-wider">Office Location</span>
+                                    <span className="text-purple-100 text-sm sm:text-base font-medium truncate block">Tilottama, Butwal, Nepal</span>
                                 </div>
-
                             </motion.div>
                         </div>
                     </motion.div>
 
-
-                    <motion.div variants={itemVariants} className="bg-[#1b0a33]/80 backdrop-blur-xl rounded-2xl p-6 md:p-8 shadow-2xl relative border border-purple-500/20">
+                    <motion.div variants={itemVariants} className="lg:col-span-7 bg-[#1c0a36]/90   rounded-xl p-6 sm:p-8 md:p-10 shadow-2xl backdrop-blur-xl">
                         <form onSubmit={handleSubmit} className="space-y-5">
-
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div className="space-y-1.5">
                                     <label className="block text-xs font-semibold text-purple-200 uppercase tracking-wider">
                                         Name
@@ -168,10 +162,10 @@ export default function Contact() {
                                         type="text"
                                         name="name"
                                         required
-                                        placeholder="Your name"
+                                        placeholder="Ramesh Adhikari"
                                         value={formData.name}
                                         onChange={handleChange}
-                                        className="w-full bg-[#120524] border border-purple-500/30 rounded-xl px-4 py-3 text-sm text-white placeholder-purple-400/40 focus:outline-none  transition-colors"
+                                        className="w-full bg-[#0e0321] border border-purple-500/30 rounded-xl px-4 py-3 text-sm text-white placeholder-purple-400/40 focus:outline-none focus:border-amber-400 transition-colors"
                                     />
                                 </div>
 
@@ -186,7 +180,7 @@ export default function Contact() {
                                         placeholder="you@example.com"
                                         value={formData.email}
                                         onChange={handleChange}
-                                        className="w-full bg-[#120524] border border-purple-500/30 rounded-xl px-4 py-3 text-sm text-white placeholder-purple-400/40 focus:outline-none transition-colors"
+                                        className="w-full bg-[#0e0321] border border-purple-500/30 rounded-xl px-4 py-3 text-sm text-white placeholder-purple-400/40 focus:outline-none focus:border-amber-400 transition-colors"
                                     />
                                 </div>
                             </div>
@@ -201,7 +195,7 @@ export default function Contact() {
                                     placeholder="+977 98XXXXXXXX"
                                     value={formData.phone}
                                     onChange={handleChange}
-                                    className="w-full bg-[#120524] border border-purple-500/30 rounded-xl px-4 py-3 text-sm text-white placeholder-purple-400/40 focus:outline-none transition-colors"
+                                    className="w-full bg-[#0e0321] border border-purple-500/30 rounded-xl px-4 py-3 text-sm text-white placeholder-purple-400/40 focus:outline-none focus:border-amber-400 transition-colors"
                                 />
                             </div>
 
@@ -213,27 +207,25 @@ export default function Contact() {
                                     name="message"
                                     required
                                     rows={4}
-                                    placeholder="Your message here..."
+                                    placeholder="Describe your project requirements..."
                                     value={formData.message}
                                     onChange={handleChange}
-                                    className="w-full bg-[#120524] border border-purple-500/30 rounded-xl p-4 text-sm text-white placeholder-purple-400/40 focus:outline-none transition-colors resize-none"
+                                    className="w-full bg-[#0e0321] border border-purple-500/30 rounded-xl p-4 text-sm text-white placeholder-purple-400/40 focus:outline-none focus:border-amber-400 transition-colors resize-none"
                                 />
-                                <span className="absolute right-3 bottom-3 text-[11px] text-purple-400/50 pointer-events-none">
+                                <span className="absolute right-3 bottom-3 text-[11px] text-purple-400/50 pointer-events-none font-mono">
                                     {formData.message.length}/1000
                                 </span>
                             </div>
 
                             <motion.button
-                                whileHover={{ scale: 1.015 }}
-                                whileTap={{ scale: 0.985 }}
                                 type="submit"
                                 disabled={loading}
-                                className="w-full appearance-none py-3.5 px-6 rounded-xl font-semibold bg-gradient-to-r from-purple-600 to-violet-500 hover:from-purple-500 hover:to-violet-400 text-white transition-all shadow-lg shadow-purple-900/40 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                                className="w-full py-3.5 px-6 rounded-xl font-bold text-sm bg-purple-600   text-white transition-all shadow-lg shadow-purple-950/80 border border-purple-400/40 cursor-pointer disabled:opacity-50  flex items-center justify-center gap-2"
                             >
                                 {loading ? (
                                     <>
                                         <Loader2 className="w-4 h-4 animate-spin" />
-                                        <span>Sending...</span>
+                                        <span>Sending Message...</span>
                                     </>
                                 ) : (
                                     <>
@@ -247,83 +239,72 @@ export default function Contact() {
                 </motion.div>
             </section>
 
+   
             <motion.section
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.7, ease: "easeOut" }}
-                className="px-6 py-16 "
+                className="px-4 sm:px-6 lg:px-20 max-w-7xl mx-auto pt-16 z-10 relative"
             >
-                <div className="mx-auto max-w-7xl">
-                    <div className="mb-10 text-center">
-                        <h2 className="text-3xl font-bold md:text-4xl text-white">
-                            Visit Our Office
-                        </h2>
-                        <p className="mt-3 text-purple-300/70">
-                            Find Cornor Tech Pvt. Ltd. on Google Maps and plan your visit.
-                        </p>
-                    </div>
-
-                    <div className="grid gap-6 overflow-hidden rounded-2xl border border-purple-500/20 bg-[#1b0a33]/40 p-4 md:grid-cols-2 md:p-8 backdrop-blur-md">
-                        <div className="flex flex-col justify-center p-4 md:p-8 space-y-4">
-
-                            <div className="flex items-center gap-4">
-                                <div className="relative w-24 h-24 rounded-2xl    shadow-purple-950/50 flex items-center justify-center shrink-0 overflow-hidden">
-                                    <Image
-                                        src="/logo.png"
-                                        alt="Cornor Tech Pvt. Ltd. Logo"
-                                        fill
-                                        className="object-contain p-1"
-                                        priority
-                                    />
-                                </div>
-                                <div>
-                                    <h3 className="text-2xl font-bold text-white leading-tight">
-                                        Cornor Tech Pvt. Ltd.
-                                    </h3>
-                                    <p className="text-xs text-purple-400 font-medium tracking-wide uppercase mt-0.5">
-                                        Digital Solutions
-                                    </p>
-                                </div>
+                <div className="grid gap-8 overflow-hidden rounded-3xl bg-[#1c0a36]/90 border border-purple-900/30 p-6 md:p-10 lg:grid-cols-2 shadow-2xl backdrop-blur-md items-center">
+            
+                    <div className="flex flex-col justify-center space-y-6">
+                        <div className="flex items-center gap-4">
+                            <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl  border border-purple-900/30 flex items-center justify-center shrink-0 overflow-hidden shadow-inner">
+                                <Image
+                                    src="/logo.png"
+                                    alt="Cornor Tech Pvt. Ltd. Logo"
+                                    fill
+                                    className="object-contain p-2"
+                                    priority
+                                />
                             </div>
-
-
-                            <p className="text-purple-200/80 leading-relaxed text-sm md:text-base">
-                                Tilottama, Butwal, Nepal
-                            </p>
-
-                            <p className="text-xs text-purple-300/60 space-y-0.5 font-mono">
-                                <span>Registration No: 366203/81/82</span> <br />
-                                <span>PAN No: 622355199</span>
-                            </p>
-
-                            <motion.a
-                                whileHover={{ scale: 1.03 }}
-                                whileTap={{ scale: 0.97 }}
-                                href="https://www.google.com/maps/place/Cornor+Tech/@27.6600192,83.4629464,17z"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="mt-2 inline-flex w-fit items-center gap-2 rounded-xl bg-gradient-to-r from-purple-600 to-violet-500 text-white px-6 py-3 font-semibold shadow-lg shadow-purple-900/30 transition-all hover:from-purple-500 hover:to-violet-400 text-sm"
-                            >
-                                <span>Open in Google Maps</span>
-                                <span aria-hidden="true">↗</span>
-                            </motion.a>
+                            <div>
+                                <h3 className="text-xl sm:text-2xl font-bold text-white leading-tight">
+                                    Cornor Tech Pvt. Ltd.
+                                </h3>
+                                <p className="text-xs text-violet-400 font-semibold tracking-wider uppercase mt-1">
+                                    Digital Solutions Agency
+                                </p>
+                            </div>
                         </div>
 
-                        <div className="min-h-[420px] overflow-hidden rounded-xl border border-purple-500/20">
-                            <iframe
-                                title="Cornor Tech Pvt. Ltd Location"
-                                src="https://maps.google.com/maps?q=Cornor+Tech,27.6600192,83.4629464&t=&z=16&ie=UTF8&iwloc=B&output=embed"
-                                width="100%"
-                                height="100%"
-                                style={{ minHeight: "420px", border: 0 }}
-                                loading="lazy"
-                                allowFullScreen
-                                referrerPolicy="no-referrer-when-downgrade"
-                            />
+                        <p className="text-purple-200/90 leading-relaxed text-sm md:text-base">
+                            Tilottama, Butwal, Rupandehi, Nepal
+                        </p>
+
+                        <div className="text-xs text-purple-300/70 space-y-1 font-mono bg-purple-950/60 p-4 rounded-xl border border-purple-500/20 w-fit">
+                            <div>Registration No: <span className="text-white font-semibold">366203/81/82</span></div>
+                            <div>PAN No: <span className="text-white font-semibold">622355199</span></div>
                         </div>
 
+                        <motion.a
+                            whileHover={{ scale: 1.03 }}
+                            whileTap={{ scale: 0.97 }}
+                            href="https://www.google.com/maps/place/Cornor+Tech/@27.6600192,83.4629464,17z"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex w-fit items-center gap-2 rounded-xl bg-purple-800 hover:bg-purple-700 text-white px-5 py-2.5 font-semibold shadow-md border border-purple-400/40 transition-all text-xs sm:text-sm"
+                        >
+                            <span>Open in Google Maps</span>
+                            <span aria-hidden="true">↗</span>
+                        </motion.a>
                     </div>
+
+                    <div className="min-h-[380px]  overflow-hidden rounded shadow-inner">
+                        <iframe
+                            title="Cornor Tech Pvt. Ltd Location"
+                            src="https://maps.google.com/maps?q=Cornor+Tech,27.6600192,83.4629464&t=&z=16&ie=UTF8&iwloc=B&output=embed"
+                            width="100%"
+                            height="100%"
+                            style={{ minHeight: "380px", border: 0 }}
+                            loading="lazy"
+                            allowFullScreen
+                            referrerPolicy="no-referrer-when-downgrade"
+                        />
+                    </div>
+
                 </div>
             </motion.section>
         </div>

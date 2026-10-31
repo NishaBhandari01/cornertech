@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { ArrowUpRight, Code2, Lightbulb } from 'lucide-react';
 import Image from 'next/image';
+import CornorTechLogoAnimation from '../loading/page';
 
 
 const AnimatedKite = ({
@@ -131,6 +132,7 @@ export default function HeroSection() {
             <AnimatedKite initialX="92%" initialY="10%" size={48} delay={0.5} duration={7.2} color="#a855f7" />
             <AnimatedKite initialX="1%" initialY="52%" size={38} delay={1.8} duration={6} color="#3b82f6" />
             <AnimatedKite initialX="64%" initialY="2%" size={28} delay={2.3} duration={5.2} color="#10b981" />
+            <AnimatedKite initialX="76%" initialY="48%" size={42} delay={0} duration={6.5} color="#ea3323" />
 
 
             <SparkleParticle top="20%" left="15%" delay={0.2} size={4} />
@@ -177,7 +179,7 @@ export default function HeroSection() {
                             CORNOR
                         </motion.h1>
 
-                     
+
                         <motion.div
                             initial={{ opacity: 0, x: -30 }}
                             animate={{ opacity: 1, x: 0 }}
@@ -191,23 +193,75 @@ export default function HeroSection() {
                                 <Code2 className="w-6 h-6 sm:w-9 sm:h-9" />
                             </motion.div>
 
-                
-                            <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tighter uppercase leading-none bg-gradient-to-r from-purple-400 via-violet-300 to-indigo-300 bg-clip-text text-transparent drop-shadow-[0_0_40px_rgba(168,85,247,0.4)]">
-                                TECH <span className="text-purple-300/90 font-extrabold">PVT. LTD</span>
+
+                            <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tighter uppercase leading-none bg-white bg-clip-text text-transparent drop-shadow-[0_0_40px_rgba(168,85,247,0.4)]">
+                                TECH <span className="text-purple-400/90 font-extrabold">PVT. LTD</span>
                             </h1>
                         </motion.div>
                     </div>
 
                     <motion.div
-                        initial={{ opacity: 0, opacity: 1 }}
+                        initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.8, delay: 0.3 }}
-                        className="lg:col-span-3 flex flex-col justify-end items-start lg:items-end space-y-1.5 pb-2 border-l lg:border-l-0 lg:border-r border-purple-500/20 pl-4 lg:pl-0 lg:pr-4"
+                        className="lg:col-span-3 flex flex-col justify-end items-start lg:items-end space-y-1.5 pb-2 pl-4 lg:pl-0 lg:pr-4"
                     >
-                        <span className="text-[11px] font-mono tracking-widest text-purple-400 uppercase font-bold">OUR CAPABILITIES</span>
-                        <span className="text-xs sm:text-sm font-mono tracking-wider text-purple-200/80 uppercase hover:text-white transition-colors cursor-pointer">DIGITAL MARKETING</span>
-                        <span className="text-xs sm:text-sm font-mono tracking-wider text-purple-200/80 uppercase hover:text-white transition-colors cursor-pointer">GRAPHIC DESIGN</span>
-                        <span className="text-xs sm:text-sm font-mono tracking-wider text-purple-200/80 uppercase hover:text-white transition-colors cursor-pointer">MOBILE APP DEV</span>
+                        <span className="text-[11px] font-mono tracking-widest text-purple-400 uppercase font-bold z-10">
+                            OUR CAPABILITIES
+                        </span>
+
+                        {/* Mask container to hide overflowing scrolling text */}
+                        <div className="h-28 overflow-hidden relative w-full flex flex-col justify-end items-start lg:items-end">
+                            <motion.div
+                                animate={{ y: ['0%', '-50%'] }}
+                                transition={{
+                                    duration: 12,
+                                    repeat: Infinity,
+                                    ease: 'linear',
+                                }}
+                                className="flex flex-col space-y-1.5 items-start lg:items-end"
+                            >
+                                {/* First Set of Items */}
+                                <span className="text-[9px] font-mono tracking-wider text-purple-200/80 uppercase hover:text-white transition-colors cursor-pointer">
+                                    Web Development
+                                </span>
+                                <span className="text-[9px] font-mono tracking-wider text-purple-200/80 uppercase hover:text-white transition-colors cursor-pointer">
+                                    DIGITAL MARKETING
+                                </span>
+                                <span className="text-[9px] font-mono tracking-wider text-purple-200/80 uppercase hover:text-white transition-colors cursor-pointer">
+                                    GRAPHIC DESIGN
+                                </span>
+                                <span className="text-[9px] font-mono tracking-wider text-purple-200/80 uppercase hover:text-white transition-colors cursor-pointer">
+                                    MOBILE APP DEV
+                                </span>
+                                <span className="text-[9px] font-mono tracking-wider text-purple-200/80 uppercase hover:text-white transition-colors cursor-pointer">
+                                    Content Creation
+                                </span>
+                                <span className="text-[9px] font-mono tracking-wider text-purple-200/80 uppercase hover:text-white transition-colors cursor-pointer">
+                                    cloud Solution
+                                </span>
+
+
+                                <span className="text-[9px] font-mono tracking-wider text-purple-200/80 uppercase hover:text-white transition-colors cursor-pointer">
+                                    Web Development
+                                </span>
+                                <span className="text-[9px] font-mono tracking-wider text-purple-200/80 uppercase hover:text-white transition-colors cursor-pointer">
+                                    DIGITAL MARKETING
+                                </span>
+                                <span className="text-[9px] font-mono tracking-wider text-purple-200/80 uppercase hover:text-white transition-colors cursor-pointer">
+                                    GRAPHIC DESIGN
+                                </span>
+                                <span className="text-[9px] font-mono tracking-wider text-purple-200/80 uppercase hover:text-white transition-colors cursor-pointer">
+                                    MOBILE APP DEV
+                                </span>
+                                <span className="text-[9px] font-mono tracking-wider text-purple-200/80 uppercase hover:text-white transition-colors cursor-pointer">
+                                    Content Creation
+                                </span>
+                                <span className="text-[9px] font-mono tracking-wider text-purple-200/80 uppercase hover:text-white transition-colors cursor-pointer">
+                                    cloud Solution
+                                </span>
+                            </motion.div>
+                        </div>
                     </motion.div>
 
                 </div>
@@ -222,28 +276,25 @@ export default function HeroSection() {
                         whileHover={{ y: -6 }}
                         className="md:col-span-3 bg-[#1b0a33]/90 rounded-3xl p-6 border border-purple-500/20 flex flex-col justify-between shadow-xl backdrop-blur-md relative overflow-hidden group"
                     >
-             
+
                         <div className="flex items-center justify-between mb-6">
                             <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
                             <span className="text-xs font-mono font-semibold text-purple-300/70 tracking-wider">EST. 2023</span>
                         </div>
 
-                        {/* Logo Watermark Preview */}
+
                         <div className="my-6 flex items-center justify-center relative">
                             <div className="w-44 h-44 rounded-2xl bg-gray-300 flex items-center justify-center shadow-inner group-hover:scale-110 transition-transform duration-300">
-                               
-                                    <Image
-                                        src="/logo.png"
-                                        alt="Cornor Tech Pvt. Ltd. Logo"
-                                        fill
-                                        className="object-contain p-1"
-                                        priority
-                                    />
-                            
+                                <Image
+                                    src="/logo.png"
+                                    alt="Cornor Tech Pvt. Ltd. Logo"
+                                    fill
+                                    className="object-contain p-1"
+                                    priority
+                                />
                             </div>
                         </div>
 
-                        {/* Description Text */}
                         <p className="text-xs sm:text-sm text-purple-200/80 leading-relaxed font-normal">
                             Not freelancers. Not outsourcing. PM-led teams that work like your own.
                         </p>
