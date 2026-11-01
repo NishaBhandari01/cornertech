@@ -1,4 +1,6 @@
 import React, { useState, useMemo, useRef } from 'react';
+import { type FormEvent } from "react";
+import { toast } from "sonner";
 import {
   Quote,
   Star,
@@ -6,12 +8,10 @@ import {
   X,
   Send,
   MessageSquarePlus,
-  LayoutGrid,
   ChevronRight,
   ChevronLeft
 } from 'lucide-react';
 import Image from 'next/image';
-import { div } from 'framer-motion/client';
 import StatsGlance from './StatsGlance';
 
 export interface Testimonial {
@@ -25,6 +25,22 @@ export interface Testimonial {
   rating: number;
   impactMetrics?: string;
 }
+
+interface TestimonialFormData {
+    name: string;
+    role: string;
+    organization: string;
+    serviceCategory: string;
+    testimonialInput: string;
+}
+
+const initialForm: TestimonialFormData = {
+    name: "",
+    role: "",
+    organization: "",
+    serviceCategory: "",
+    testimonialInput: "",
+};
 
 const TESTIMONIALS_DATA: Testimonial[] = [
   {
@@ -104,22 +120,14 @@ export default function TestimonialsShowcase() {
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
   const sliderRef = useRef<HTMLDivElement>(null);
-
-  const [formData, setFormData] = useState({
-    name: '',
-    role: '',
-    organization: '',
-    tag: 'Web Development',
-    quote: '',
-    rating: 5
-  });
+  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState<TestimonialFormData>(initialForm);
 
   const filteredTestimonials = useMemo(() => {
     if (selectedCategory === 'All') return TESTIMONIALS_DATA;
     return TESTIMONIALS_DATA.filter(t => t.tag === selectedCategory);
   }, [selectedCategory]);
 
-  // Handle slide navigation via left/right arrows
   const handleScroll = (direction: 'left' | 'right') => {
     if (!sliderRef.current) return;
     const cardWidth = 380 + 24; // Card width + gap
@@ -134,7 +142,6 @@ export default function TestimonialsShowcase() {
     });
   };
 
-  // Handle slide navigation via pagination dots
   const scrollToIndex = (index: number) => {
     if (!sliderRef.current) return;
     const cardWidth = 380 + 24;
@@ -145,25 +152,58 @@ export default function TestimonialsShowcase() {
     });
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmittedSuccess(true);
-    setTimeout(() => {
-      setSubmittedSuccess(false);
-      setIsSubmitModalOpen(false);
-      setFormData({
-        name: '',
-        role: '',
-        organization: '',
-        tag: 'Web Development',
-        quote: '',
-        rating: 5
-      });
-    }, 2000);
+
+    if (loading) return;
+
+    const isEmpty = Object.values(formData).some(
+        (value) => !value.trim()
+    );
+
+    if (isEmpty) {
+        toast.error("Please complete all fields.");
+        return;
+    }
+
+    try {
+        setLoading(true);
+
+        const response = await fetch("/api/testimonial", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                name: formData.name.trim(),
+                role: formData.role.trim(),
+                organization: formData.organization.trim(),
+                serviceCategory: formData.serviceCategory.trim(),
+                testimonialInput: formData.testimonialInput.trim(),
+            }),
+        });
+
+        const result = await response.json();
+
+        if (!response.ok || !result.success) {
+            throw new Error(
+                result.message || "Unable to submit testimonial."
+            );
+        }
+
+        toast.success("Thank you! Your testimonial was submitted.");
+        setFormData(initialForm);
+        setSubmittedSuccess(true);
+
+    } catch (error) {
+        console.error("Testimonial submission error:", error);
+        toast.error(error instanceof Error ? error.message : "Something went wrong. Please try again.");
+    } finally {
+        setLoading(false);
+    }
   };
 
   return (
-
     <>
       <section className="relative w-full bg-[#0b0217] text-purple-100 py-20 px-4 sm:px-6 md:px-12 lg:px-20 overflow-hidden font-sans border-y border-purple-500/20 selection:bg-purple-600 selection:text-white">
 
@@ -174,7 +214,6 @@ export default function TestimonialsShowcase() {
             backgroundSize: '28px 28px'
           }}
         />
-
 
         <div className="absolute inset-0 flex items-start justify-center pointer-events-none select-none z-0 overflow-hidden opacity-5">
           <span className="text-[18vw] font-black uppercase tracking-widest bg-clip-text text-transparent bg-gradient-to-b from-purple-400 to-purple-950 whitespace-nowrap">
@@ -206,7 +245,10 @@ export default function TestimonialsShowcase() {
             </div>
 
             <button
-              onClick={() => setIsSubmitModalOpen(true)}
+              onClick={() => {
+                setSubmittedSuccess(false);
+                setIsSubmitModalOpen(true);
+              }}
               className="px-5 py-3 rounded-xl bg-purple-700 hover:bg-purple-800 text-white font-bold text-xs sm:text-sm shadow-lg shadow-purple-950/90 border border-purple-400/40 transition-all duration-300 flex items-center gap-2.5 group cursor-pointer self-start lg:self-auto"
             >
               <MessageSquarePlus className="w-4 h-4 group-hover:scale-110 transition-transform" />
@@ -214,12 +256,8 @@ export default function TestimonialsShowcase() {
             </button>
           </div>
 
-
-          <div className="flex flex-wrap items-center justify-between gap-4  py-3">
-
-
+          <div className="flex flex-wrap items-center justify-between gap-4 py-3">
             <div className="flex items-center gap-3">
-
               {!isExpanded && (
                 <div className="flex items-center gap-2">
                   <button
@@ -250,8 +288,7 @@ export default function TestimonialsShowcase() {
             </div>
           </div>
 
-
-          <div className="relative ">
+          <div className="relative">
             <div
               ref={sliderRef}
               className={
@@ -268,8 +305,9 @@ export default function TestimonialsShowcase() {
                   <div
                     key={item.id}
                     onClick={() => setActiveModalItem(item)}
-                    className={`bg-gradient-to-b from-[#1c0a36]/90 via-[#120427]/95 to-[#0b0217] border border-purple-500/25 hover:border-purple-400/70 rounded-3xl flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 shadow-[0_0_20px_rgba(11,2,23,0.8)] group relative overflow-hidden cursor-pointer ${!isExpanded ? 'w-[320px] sm:w-[380px] flex-shrink-0' : ''
-                      }`}
+                    className={`bg-gradient-to-b from-[#1c0a36]/90 via-[#120427]/95 to-[#0b0217] border border-purple-500/25 hover:border-purple-400/70 rounded-3xl flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 shadow-[0_0_20px_rgba(11,2,23,0.8)] group relative overflow-hidden cursor-pointer ${
+                      !isExpanded ? 'w-[320px] sm:w-[380px] flex-shrink-0' : ''
+                    }`}
                   >
                     <div className="space-y-4 p-6 sm:p-7">
                       <div className="flex items-center justify-between">
@@ -284,7 +322,7 @@ export default function TestimonialsShowcase() {
                       </div>
 
                       <p className="text-purple-100 text-sm sm:text-base leading-relaxed italic font-normal">
-                        "{displayQuote}"
+                        &quot;{displayQuote}&quot;
                       </p>
                     </div>
 
@@ -331,25 +369,24 @@ export default function TestimonialsShowcase() {
                   <button
                     key={idx}
                     onClick={() => scrollToIndex(idx)}
-                    className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${activeIndex === idx
-                      ? 'w-8 bg-purple-500 shadow-md shadow-amber-400/30'
-                      : 'w-2.5 bg-purple-900/60 hover:bg-purple-700/80 border border-purple-500/20'
-                      }`}
+                    className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
+                      activeIndex === idx
+                        ? 'w-8 bg-purple-500 shadow-md shadow-amber-400/30'
+                        : 'w-2.5 bg-purple-900/60 hover:bg-purple-700/80 border border-purple-500/20'
+                    }`}
                     aria-label={`Go to slide ${idx + 1}`}
                   />
                 ))}
               </div>
             )}
             <div className='flex items-center justify-center'>
-              <div className="text-xs mt-4 w-fit m-5  font-mono text-purple-300/80 bg-purple-950/70 px-3.5 py-1.5 rounded-lg border border-purple-500/20">
+              <div className="text-xs mt-4 w-fit m-5 font-mono text-purple-300/80 bg-purple-950/70 px-3.5 py-1.5 rounded-lg border border-purple-500/20">
                 Showing <span className="text-amber-400 font-bold">{filteredTestimonials.length}</span> of {TESTIMONIALS_DATA.length} reviews
               </div>
-
             </div>
 
           </div>
         </div>
-
 
         {activeModalItem && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md transition-all">
@@ -373,9 +410,8 @@ export default function TestimonialsShowcase() {
               </div>
 
               <div className="relative pl-6 border-l-2 border-purple-500/50">
-
                 <p className="text-purple-100 text-base sm:text-lg leading-relaxed italic">
-                  "{activeModalItem.quote}"
+                  &quot;{activeModalItem.quote}&quot;
                 </p>
               </div>
 
@@ -403,13 +439,15 @@ export default function TestimonialsShowcase() {
           </div>
         )}
 
-
         {isSubmitModalOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md transition-all">
-            <div className="bg-[#16062f] border border-purple-400/50 rounded-3xl p-6 sm:p-8 max-w-lg w-full shadow-2xl relative space-y-5">
+            <div className="bg-[#16062f] border border-purple-900/50 rounded-3xl p-6 sm:p-8 max-w-lg w-full shadow-2xl relative space-y-5">
               <button
-                onClick={() => setIsSubmitModalOpen(false)}
-                className="absolute top-4 right-4 p-2 rounded-full bg-purple-950/80 hover:bg-purple-800 text-purple-300 hover:text-white border border-purple-500/30 transition-colors cursor-pointer"
+                onClick={() => {
+                  setIsSubmitModalOpen(false);
+                  setSubmittedSuccess(false);
+                }}
+                className="absolute top-4 right-4 p-2 rounded-full bg-purple-950/80 hover:bg-purple-800 text-purple-300 hover:text-white border border-purple-900/30 transition-colors cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -431,7 +469,7 @@ export default function TestimonialsShowcase() {
                     </p>
                   </div>
 
-                  <form onSubmit={handleFormSubmit} className="space-y-4">
+                  <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div>
                         <label className="block text-xs font-semibold text-purple-200 mb-1">Full Name</label>
@@ -441,7 +479,7 @@ export default function TestimonialsShowcase() {
                           value={formData.name}
                           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                           placeholder="e.g. Ramesh Adhikari"
-                          className="w-full bg-[#0e0321] border border-purple-500/30 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400"
+                          className="w-full bg-[#0e0321] border border-purple-500/30 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-purple-400"
                         />
                       </div>
                       <div>
@@ -452,7 +490,7 @@ export default function TestimonialsShowcase() {
                           value={formData.role}
                           onChange={(e) => setFormData({ ...formData, role: e.target.value })}
                           placeholder="e.g. Founder & CEO"
-                          className="w-full bg-[#0e0321] border border-purple-500/30 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400"
+                          className="w-full bg-[#0e0321] border border-purple-500/30 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-purple-400"
                         />
                       </div>
                     </div>
@@ -466,20 +504,25 @@ export default function TestimonialsShowcase() {
                           value={formData.organization}
                           onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
                           placeholder="e.g. Nepal Tech Pvt. Ltd."
-                          className="w-full bg-[#0e0321] border border-purple-500/30 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400"
+                          className="w-full bg-[#0e0321] border border-purple-500/30 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-purple-400"
                         />
                       </div>
                       <div>
                         <label className="block text-xs font-semibold text-purple-200 mb-1">Service Category</label>
                         <select
-                          value={formData.tag}
-                          onChange={(e) => setFormData({ ...formData, tag: e.target.value })}
-                          className="w-full bg-[#0e0321] border border-purple-500/30 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400"
+                          value={formData.serviceCategory}
+                          onChange={(e) => setFormData({ ...formData, serviceCategory: e.target.value })}
+                          className="w-full bg-[#0e0321] border border-purple-500/30 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-purple-400"
                         >
+                          <option value="" disabled>Select a category</option>
                           <option value="Social Media Marketing">Social Media Marketing</option>
                           <option value="Web Development">Web Development</option>
                           <option value="IT Infrastructure">IT Infrastructure</option>
                           <option value="Graphic Design">Graphic Design</option>
+                          <option value="Cloud Solutions">Cloud Solutions</option>
+                          <option value="App Development">App Development</option>
+                          <option value="Digital Marketing">Digital Marketing</option>
+                          <option value="Other">Other</option>
                         </select>
                       </div>
                     </div>
@@ -489,19 +532,20 @@ export default function TestimonialsShowcase() {
                       <textarea
                         rows={4}
                         required
-                        value={formData.quote}
-                        onChange={(e) => setFormData({ ...formData, quote: e.target.value })}
+                        value={formData.testimonialInput}
+                        onChange={(e) => setFormData({ ...formData, testimonialInput: e.target.value })}
                         placeholder="Describe your experience working with Cornor Tech..."
-                        className="w-full bg-[#0e0321] border border-purple-500/30 rounded-xl p-3.5 text-sm text-white focus:outline-none focus:border-amber-400 resize-none"
+                        className="w-full bg-[#0e0321] border border-purple-500/30 rounded-xl p-3.5 text-sm text-white focus:outline-none focus:border-purple-400 resize-none"
                       />
                     </div>
 
                     <button
                       type="submit"
-                      className="w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 to-amber-500 hover:from-purple-500 hover:to-amber-400 text-white font-bold text-sm shadow-lg shadow-purple-950/80 border border-purple-400/40 transition-all flex items-center justify-center gap-2 cursor-pointer"
+                      disabled={loading}
+                      className="w-full py-3 rounded-xl bg-slate-300 text-purple-600 font-bold text-sm border border-purple-400/40 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
                     >
                       <Send className="w-4 h-4" />
-                      <span>Submit Review</span>
+                      <span>{loading ? "Submitting..." : "Submit Review"}</span>
                     </button>
                   </form>
                 </>
@@ -510,8 +554,7 @@ export default function TestimonialsShowcase() {
           </div>
         )}
       </section>
-      <StatsGlance/>
+      <StatsGlance />
     </>
-
   );
 }

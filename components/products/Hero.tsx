@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Sparkles, Tag, CheckCircle2, Layers } from 'lucide-react';
+import { ArrowRight, Tag, CheckCircle2, Layers } from 'lucide-react';
 import Image from 'next/image';
 
 const PRODUCTS = [
@@ -18,7 +18,7 @@ const PRODUCTS = [
     currentPrice: "NPR 11,111 / year",
     savings: "You save NPR 8,889 • Premium plan",
     features: ["Order & KOT Management", "Kitchen Display System", "IRD Billing & VAT"],
-    link: "#"
+    link: "https://atithi.cornortech.com/"
   },
   {
     id: 2,
@@ -34,7 +34,7 @@ const PRODUCTS = [
     currentPrice: "NPR 11,111 / year",
     savings: "You save NPR 8,889 • Premium plan",
     features: ["Offline Billing", "Barcode Scanning", "Inventory"],
-    link: "#"
+    link: "https://artha.cornortech.com/login"
   },
   {
     id: 3,
@@ -46,7 +46,7 @@ const PRODUCTS = [
     description: "Cutting-edge AI-based solutions, intelligent automation products, and custom software services built to streamline workflows, enhance decision-...",
     hasPricing: false,
     features: ["AI Automation", "Custom Solutions", "Workflow Pipelines"],
-    link: "#"
+    link: "/"
   },
   {
     id: 4,
@@ -58,7 +58,7 @@ const PRODUCTS = [
     description: "A reliable, scalable SMS platform built for businesses — offering high-volume bulk promotions, secure transactional OTPs, and robust RESTful API...",
     hasPricing: false,
     features: ["Bulk SMS", "Transactional OTP", "API Integration"],
-    link: "#"
+    link: "https://www.cornortech.com/sms-vendor"
   },
   {
     id: 5,
@@ -70,7 +70,7 @@ const PRODUCTS = [
     description: "An offline-capable clinic management system for medical practices, healthcare centers, and outpatient clinics — built for fast patient billing,...",
     hasPricing: false,
     features: ["Offline Billing", "Barcode Scanning", "Medical Inventory"],
-    link: "#"
+    link: "https://www.cornortech.com/products"
   }
 ];
 

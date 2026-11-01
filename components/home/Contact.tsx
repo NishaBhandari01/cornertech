@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from 'react';
+import { useState, type FormEvent } from "react";
+import { toast } from "sonner";
 import { Mail, MapPin, Loader2, ArrowRight, Phone } from 'lucide-react';
 import { motion, Variants } from "framer-motion";
 import Image from 'next/image';
@@ -11,9 +12,16 @@ interface FormDataState {
     phone: string;
     message: string;
 }
+const initialForm: FormDataState = {
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+};
 
 export default function Contact() {
     const [loading, setLoading] = useState<boolean>(false);
+
     const [formData, setFormData] = useState<FormDataState>({
         name: '',
         email: '',
@@ -21,41 +29,49 @@ export default function Contact() {
         message: '',
     });
 
-    const handleChange = (
-        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-    ) => {
-        const { name, value } = e.target;
-        if (name === 'message' && value.length > 1000) return;
-        setFormData((prev) => ({ ...prev, [name]: value }));
-    };
-
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setLoading(true);
+
+        if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+            toast.error("Please fill in all required fields.");
+            return;
+        }
+
         try {
-            const res = await fetch("/api/contact", {
+            setLoading(true);
+
+            const response = await fetch("/api/contact", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: {
+                    "Content-Type": "application/json",
+                },
                 body: JSON.stringify(formData),
             });
 
-            if (!res.ok) {
-                return;
+            const result = await response.json();
+
+            if (!response.ok || !result.success) {
+                throw new Error(result.message || "Failed to send message.");
             }
 
-            setFormData({
-                name: "",
-                email: "",
-                phone: "",
-                message: "",
-            });
+            toast.success(result.message || "Message sent successfully!");
+
+            setFormData(initialForm);
+
         } catch (error) {
-            console.error(error);
+            console.error("Contact form error:", error);
+            toast.error( error instanceof Error ? error.message : "Something went wrong. Please try again.");
         } finally {
             setLoading(false);
         }
     };
 
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({ ...prev, [name]: value }));
+    }
+
+   
     const containerVariants: Variants = {
         hidden: { opacity: 0 },
         visible: {
