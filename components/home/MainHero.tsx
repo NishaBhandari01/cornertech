@@ -90,7 +90,6 @@ const SparkleParticle = ({ top, left, delay, size }: { top: string; left: string
 export default function HeroSection() {
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
-
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
     const springX = useSpring(mouseX, { stiffness: 60, damping: 20 });
@@ -188,19 +187,26 @@ export default function HeroSection() {
                         >
                             <motion.div
                                 whileHover={{ rotate: 12, scale: 1.1 }}
-                                className="w-14 h-10 sm:w-20 sm:h-14 rounded-2xl bg-purple-600/30 border border-purple-400/50 flex items-center justify-center text-purple-300 shadow-lg shadow-purple-950/60 backdrop-blur-md"
+                                className="w-14 h-10 sm:w-25 sm:h-34 rounded-2xl  flex items-center justify-center text-purple-400 "
                             >
-                                <Code2 className="w-6 h-6 sm:w-9 sm:h-9" />
+                                <Code2 className="w-16 h-16 sm:w-34 sm:h-34" />
                             </motion.div>
 
 
-                            <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tighter uppercase leading-none bg-white bg-clip-text text-transparent drop-shadow-[0_0_40px_rgba(168,85,247,0.4)]">
-                                TECH <span className="text-purple-400/90 font-extrabold">PVT. LTD</span>
-                            </h1>
+                            <div className="overflow-hidden">
+                                <motion.h1
+                                    initial={{ y: "100%" }}
+                                    animate={{ y: 0 }}
+                                    transition={{ duration: 5, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                                    className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tighter uppercase leading-none bg-white bg-clip-text text-transparent "
+                                >
+                                    TECH <span className="text-purple-400/90 font-extrabold">PVT. LTD</span>
+                                </motion.h1>
+                            </div>
                         </motion.div>
                     </div>
 
-                     <ParchmentCapabilities/>
+                    <ParchmentCapabilities />
 
                 </div>
             </div>
@@ -283,10 +289,10 @@ export default function HeroSection() {
                         </div>
                     </motion.div>
 
-         
+
                     <div className="md:col-span-3 flex flex-col gap-5">
 
-    
+
                         <motion.div
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}

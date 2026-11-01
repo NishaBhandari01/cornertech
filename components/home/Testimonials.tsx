@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import Image from 'next/image';
 import StatsGlance from './StatsGlance';
+import LogoMarquee from './LogoMarquee';
 
 export interface Testimonial {
   id: string;
@@ -27,19 +28,19 @@ export interface Testimonial {
 }
 
 interface TestimonialFormData {
-    name: string;
-    role: string;
-    organization: string;
-    serviceCategory: string;
-    testimonialInput: string;
+  name: string;
+  role: string;
+  organization: string;
+  serviceCategory: string;
+  testimonialInput: string;
 }
 
 const initialForm: TestimonialFormData = {
-    name: "",
-    role: "",
-    organization: "",
-    serviceCategory: "",
-    testimonialInput: "",
+  name: "",
+  role: "",
+  organization: "",
+  serviceCategory: "",
+  testimonialInput: "",
 };
 
 const TESTIMONIALS_DATA: Testimonial[] = [
@@ -158,54 +159,54 @@ export default function TestimonialsShowcase() {
     if (loading) return;
 
     const isEmpty = Object.values(formData).some(
-        (value) => !value.trim()
+      (value) => !value.trim()
     );
 
     if (isEmpty) {
-        toast.error("Please complete all fields.");
-        return;
+      toast.error("Please complete all fields.");
+      return;
     }
 
     try {
-        setLoading(true);
+      setLoading(true);
 
-        const response = await fetch("/api/testimonial", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                name: formData.name.trim(),
-                role: formData.role.trim(),
-                organization: formData.organization.trim(),
-                serviceCategory: formData.serviceCategory.trim(),
-                testimonialInput: formData.testimonialInput.trim(),
-            }),
-        });
+      const response = await fetch("/api/testimonial", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name.trim(),
+          role: formData.role.trim(),
+          organization: formData.organization.trim(),
+          serviceCategory: formData.serviceCategory.trim(),
+          testimonialInput: formData.testimonialInput.trim(),
+        }),
+      });
 
-        const result = await response.json();
+      const result = await response.json();
 
-        if (!response.ok || !result.success) {
-            throw new Error(
-                result.message || "Unable to submit testimonial."
-            );
-        }
+      if (!response.ok || !result.success) {
+        throw new Error(
+          result.message || "Unable to submit testimonial."
+        );
+      }
 
-        toast.success("Thank you! Your testimonial was submitted.");
-        setFormData(initialForm);
-        setSubmittedSuccess(true);
+      toast.success("Thank you! Your testimonial was submitted.");
+      setFormData(initialForm);
+      setSubmittedSuccess(true);
 
     } catch (error) {
-        console.error("Testimonial submission error:", error);
-        toast.error(error instanceof Error ? error.message : "Something went wrong. Please try again.");
+      console.error("Testimonial submission error:", error);
+      toast.error(error instanceof Error ? error.message : "Something went wrong. Please try again.");
     } finally {
-        setLoading(false);
+      setLoading(false);
     }
   };
 
   return (
     <>
-      <section className="relative w-full bg-[#0b0217] text-purple-100 py-20 px-4 sm:px-6 md:px-12 lg:px-20 overflow-hidden font-sans border-y border-purple-500/20 selection:bg-purple-600 selection:text-white">
+      <section className="relative w-full bg-[#0b0217] text-purple-100 py-20 px-4 sm:px-6 md:px-12 lg:px-20 overflow-hidden font-sans  selection:bg-purple-600 selection:text-white">
 
         <div
           className="absolute inset-0 pointer-events-none opacity-20 z-0"
@@ -305,9 +306,8 @@ export default function TestimonialsShowcase() {
                   <div
                     key={item.id}
                     onClick={() => setActiveModalItem(item)}
-                    className={`bg-gradient-to-b from-[#1c0a36]/90 via-[#120427]/95 to-[#0b0217] border border-purple-500/25 hover:border-purple-400/70 rounded-3xl flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 shadow-[0_0_20px_rgba(11,2,23,0.8)] group relative overflow-hidden cursor-pointer ${
-                      !isExpanded ? 'w-[320px] sm:w-[380px] flex-shrink-0' : ''
-                    }`}
+                    className={`bg-gradient-to-b from-[#1c0a36]/90 via-[#120427]/95 to-[#0b0217] border border-purple-500/25 hover:border-purple-400/70 rounded-3xl flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 shadow-[0_0_20px_rgba(11,2,23,0.8)] group relative overflow-hidden cursor-pointer ${!isExpanded ? 'w-[320px] sm:w-[380px] flex-shrink-0' : ''
+                      }`}
                   >
                     <div className="space-y-4 p-6 sm:p-7">
                       <div className="flex items-center justify-between">
@@ -369,11 +369,10 @@ export default function TestimonialsShowcase() {
                   <button
                     key={idx}
                     onClick={() => scrollToIndex(idx)}
-                    className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
-                      activeIndex === idx
+                    className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${activeIndex === idx
                         ? 'w-8 bg-purple-500 shadow-md shadow-amber-400/30'
                         : 'w-2.5 bg-purple-900/60 hover:bg-purple-700/80 border border-purple-500/20'
-                    }`}
+                      }`}
                     aria-label={`Go to slide ${idx + 1}`}
                   />
                 ))}
@@ -554,7 +553,9 @@ export default function TestimonialsShowcase() {
           </div>
         )}
       </section>
+      <LogoMarquee />
       <StatsGlance />
+
     </>
   );
 }

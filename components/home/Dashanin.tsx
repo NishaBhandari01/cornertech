@@ -4,6 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, } from 'lucide-react';
 import { TikaIcon, JamaraIcon, ChangaIcon, PingIcon, PujaFlowerIcon } from './DashainIcons';
+import DipakFlame from './DipakFlame';
 
 const DiyaIcon: React.FC<{ className?: string }> = ({ className = "w-4 h-4 text-amber-400" }) => (
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -59,24 +60,37 @@ export const DashainBanner: React.FC = () => {
     return (
         <section className="relative w-full bg-[#120524] text-white overflow-hidden pt-16 px-4 sm:px-8 lg:px-16 " >
             <div className="absolute top-0 inset-x-0 flex justify-between items-start pointer-events-none z-20 px-2 sm:px-6">
-                {[...Array(16)].map((_, i) => (
-                    <motion.div
-                        key={i}
-                        animate={{ y: [0, 4, 0], rotate: [0, i % 2 === 0 ? 2 : -2, 0] }}
-                        transition={{ duration: 3 + (i % 3), repeat: Infinity, ease: 'easeInOut' }}
-                        className="flex flex-col items-center"
-                    >
+                {[...Array(16)].map((_, i) => {
+                    const angle = 5 + (i % 3) * 2;      // swing amplitude: 5°, 7°, 9°
+                    const duration = 3 + (i % 3) * 0.4; // one-way swing time, slightly varied
 
-                        <div className="w-0.5 h-4 sm:h-6 bg-emerald-600/80" />
-                        <div className="w-4 h-4 sm:w-6 sm:h-6 rounded-full bg-gradient-to-br from-amber-400 via-orange-500 to-amber-600 border border-yellow-300/40 shadow-[0_0_10px_rgba(245,158,11,0.6)] flex items-center justify-center">
-                            <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-yellow-200 opacity-90" />
-                        </div>
-                    </motion.div>
-                ))}
+                    return (
+                        <motion.div
+                            key={i}
+                            style={{ transformOrigin: "top center" }}
+                            initial={{ rotate: -angle }}
+                            transition={{
+                                duration,
+                                repeat: Infinity,
+                                repeatType: "mirror",
+                                ease: "easeInOut",
+                                delay: i * 0.12,
+                            }}
+                            className="flex flex-col items-center"
+                        >
+                            <div className="w-0.5 h-4 sm:h-6 bg-emerald-600/80" />
+                            <div className="w-4 h-4 sm:w-6 sm:h-6 rounded-full bg-gradient-to-br from-amber-400 via-orange-500 to-amber-600 border border-yellow-300/40 shadow-[0_0_10px_rgba(245,158,11,0.6)] flex items-center justify-center">
+                                <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-yellow-200 opacity-90" />
+                            </div>
+                        </motion.div>
+                    );
+                })}
             </div>
 
             <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-purple-600/15 rounded-full blur-[120px] pointer-events-none" />
             <div className="absolute top-10 left-10 w-72 h-72 bg-amber-500/10 rounded-full blur-[100px] pointer-events-none" />
+
+            <DipakFlame className="w-28 h-28 relative top-35 left-20" />
 
 
             <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -110,6 +124,7 @@ export const DashainBanner: React.FC = () => {
                     );
                 })}
             </div>
+      
 
             <div className="max-w-7xl mx-auto relative mt-10 z-10 space-y-12">
 

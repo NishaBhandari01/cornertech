@@ -5,6 +5,7 @@ import AboutUsHero from "@/components/about/Hero";
 import Contact from "@/components/home/Contact";
 import { DashainBanner } from "@/components/home/Dashanin";
 import HeroSection from "@/components/home/MainHero";
+import { NewsUpdatesSection } from "@/components/home/NewsUpdatesSection";
 import { TechStack } from "@/components/home/TechStack";
 import TestimonialsShowcase from "@/components/home/Testimonials";
 import OurProducts from "@/components/our-work/Hero";
@@ -25,6 +26,7 @@ export default function Home() {
       <TestimonialsShowcase />
       <AboutUsHero />
       <LeadershipTeam />
+      <NewsUpdatesSection />
       <Contact />
     </div>
   );

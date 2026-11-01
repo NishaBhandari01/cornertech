@@ -18,15 +18,19 @@ const TYPE_SPEED = 70;
 const HOLD_TIME = 1100;    
 const SHIFT_TIME = 450;   
 
-export default function InfiniteParchmentCapabilities() {
+interface LineItem {
+  id: number;
+  text: string;
+}
 
-  const [lines, setLines] = useState([]);
-  const stepRef = useRef(0);
+export default function InfiniteParchmentCapabilities() {
+  const [lines, setLines] = useState<LineItem[]>([]);
+  const stepRef = useRef<number>(0);
 
   useEffect(() => {
     let cancelled = false;
-    const timers = [];
-    const wait = (ms) =>
+    const timers: NodeJS.Timeout[] = [];
+    const wait = (ms: number): Promise<void> =>
       new Promise((resolve) => {
         timers.push(setTimeout(resolve, ms));
       });
@@ -46,7 +50,6 @@ export default function InfiniteParchmentCapabilities() {
 
         await wait(SHIFT_TIME);
 
-        // Typewriter
         for (let i = 1; i <= text.length; i++) {
           if (cancelled) return;
           setLines((prev) =>
@@ -94,7 +97,7 @@ export default function InfiniteParchmentCapabilities() {
           }}
         >
           <AnimatePresence mode="popLayout" initial={false}>
-            {lines.map((line, id) => {
+            {lines.map((line) => {
               return (
                 <motion.div
                   key={line.id}

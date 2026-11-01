@@ -1,7 +1,7 @@
 
 "use client"
 
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
     ChevronRight,
@@ -200,7 +200,7 @@ export default function ServicesShowcase() {
 
     return (
         <section id="service" className="relative isolate overflow-hidden border-y border-purple-500/20  px-4 py-16 text-white sm:px-6 sm:py-20 lg:px-12 lg:py-24">
-            <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 opacity-30"  style={{ backgroundImage:"radial-gradient(rgba(168,85,247,0.3) 1px, transparent 1px)",  backgroundSize: "28px 28px" }}/>
+            <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 opacity-30" style={{ backgroundImage: "radial-gradient(rgba(168,85,247,0.3) 1px, transparent 1px)", backgroundSize: "28px 28px" }} />
 
             <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-20 -z-10 -translate-x-1/2 select-none whitespace-nowrap text-[17vw] font-black tracking-widest text-white/[0.025]">
                 SERVICES
@@ -248,7 +248,7 @@ export default function ServicesShowcase() {
 
                         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                             {servicesData.map((service, index) => {
-                                const Icon = serviceIcons[service.id];
+                                const Icon = serviceIcons[service.id as keyof typeof serviceIcons];
                                 const isActive = index === activeIndex;
 
                                 return (
@@ -295,7 +295,7 @@ export default function ServicesShowcase() {
                     </div>
                 </div>
 
-   
+
                 <div
                     className="relative"
                     onMouseEnter={() => setIsPlaying(false)}
@@ -313,7 +313,7 @@ export default function ServicesShowcase() {
 
                             <div className="grid grid-cols-1 lg:grid-cols-5">
 
-                         
+
                                 <div className="order-1 space-y-6 p-5 sm:p-8 lg:col-span-2 lg:p-10">
 
                                     <div className="flex flex-wrap items-center gap-3">
@@ -365,7 +365,7 @@ export default function ServicesShowcase() {
                                     </a>
                                 </div>
 
-            
+
                                 <div className="relative order-2 col-span-1 min-h-[260px] overflow-hidden sm:min-h-[360px] lg:col-span-3 lg:min-h-[500px]">
                                     <Image
                                         src={activeService.bannerImage}
