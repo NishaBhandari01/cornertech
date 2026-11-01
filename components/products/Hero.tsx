@@ -1,252 +1,269 @@
-'use client';
-
-import React, { useState } from 'react';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { ArrowRight, Sparkles, Tag, CheckCircle2, Layers } from 'lucide-react';
 import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, ExternalLink, Calendar, User, Sparkles } from 'lucide-react';
 
-export interface Product {
-  id: number;
-  category: string;
-  title: string;
-  description: string;
-  client: string;
-  serviceDate: string;
-  tools: string[];
-  banner: string;
-  previewUrl?: string;
-}
-
-const PRODUCTS_DATA: Product[] = [
+const PRODUCTS = [
   {
     id: 1,
-    category: 'Web Development',
-    title: 'Enterprise E-Commerce Platform',
-    description: 'High-performance e-commerce architecture engineered with server-side rendering, real-time inventory synchronization, and secure multi-payment gateway integrations.',
-    client: 'Nav Yantra Pvt. Ltd.',
-    serviceDate: '2025',
-    tools: ['Next.js', 'Node.js', 'Redis', 'PostgreSQL'],
-    banner: '/product/navyan.png',
-    previewUrl: 'https://navyantra.com',
+    category: "HOSPITALITY SOFTWARE",
+    badge: "FESTIVE OFFER - 44% OFF",
+    title: "Atithi RMS",
+    subtitle: "Restaurant Management, Simplified",
+    bannerImage: "/product/athiti.png",
+    description: "One system for your whole restaurant — orders, tables, kitchen (KOT), IRD-ready billing with VAT, online orders with delivery riders, stock, staff...",
+    hasPricing: true,
+    tag: "DASHAIN FESTIVE PRICE",
+    originalPrice: "NPR 20,000",
+    currentPrice: "NPR 11,111 / year",
+    savings: "You save NPR 8,889 • Premium plan",
+    features: ["Order & KOT Management", "Kitchen Display System", "IRD Billing & VAT"],
+    link: "#"
   },
   {
     id: 2,
-    category: 'EdTech Platform',
-    title: 'Writeasy — Gamified Writing Platform',
-    description: 'Interactive comprehension and creative writing platform featuring live weekly contests, collaborative stories, adaptive AI feedback, and tiered subscription plans.',
-    client: 'Cornor Tech Pvt. Ltd.',
-    serviceDate: '2024',
-    tools: ['Next.js', 'Node.js', 'EdTech', 'Gamification', 'PostgreSQL'],
-    banner: '/product/writeasy.png',
-    previewUrl: '',
+    category: "RETAIL SOFTWARE",
+    badge: "DASHAIN OFFER - 44% OFF",
+    title: "Artha POS",
+    subtitle: "Point of Sale, Reimagined",
+    bannerImage: "/product/artha pos.png",
+    description: "An offline-capable point-of-sale system for retail stores, grocery shops, supermarkets, and beverage outlets — built for fast billing, accurate inventory,...",
+    hasPricing: true,
+    tag: "DASHAIN FESTIVE PRICE",
+    originalPrice: "NPR 20,000",
+    currentPrice: "NPR 11,111 / year",
+    savings: "You save NPR 8,889 • Premium plan",
+    features: ["Offline Billing", "Barcode Scanning", "Inventory"],
+    link: "#"
   },
   {
     id: 3,
-    category: 'Digital Marketing',
-    title: 'Social Media & Political Branding',
-    description: 'Comprehensive digital campaign strategy for political leader Sulav Kharel (RSP, Rupandehi-2)—encompassing content architecture, social graphic design, and audience engagement metrics.',
-    client: 'Sulav Kharel',
-    serviceDate: '2026',
-    tools: ['Content Strategy', 'Political Branding', 'Meta Ads', 'Canva'],
-    banner: '/product/sulav_rsp.png',
-    previewUrl: '',
+    category: "ARTIFICIAL INTELLIGENCE",
+    badge: null,
+    title: "Cornor Tech AI",
+    subtitle: "AI-based solutions & automation products and services.",
+    bannerImage: "/product/cornor ai.png",
+    description: "Cutting-edge AI-based solutions, intelligent automation products, and custom software services built to streamline workflows, enhance decision-...",
+    hasPricing: false,
+    features: ["AI Automation", "Custom Solutions", "Workflow Pipelines"],
+    link: "#"
   },
   {
     id: 4,
-    category: 'POS & Logistics System',
-    title: 'Smart Agro POS & Supply Chain',
-    description: 'Offline-first point-of-sale system bridging rural farmers with local consumers. Includes real-time inventory tracking, agricultural pricing models, and PWA support.',
-    client: 'Cornor Tech Pvt. Ltd.',
-    serviceDate: '2026',
-    tools: ['React.js', 'Express', 'MySQL', 'Socket.io', 'PWA'],
-    banner: '/product/pos.png',
-    previewUrl: '',
+    category: "COMMUNICATION & MESSAGING",
+    badge: null,
+    title: "Cornor SMS",
+    subtitle: "SMS platform for bulk messaging, OTP and API integrations.",
+    bannerImage: "/product/cornor sms.png",
+    description: "A reliable, scalable SMS platform built for businesses — offering high-volume bulk promotions, secure transactional OTPs, and robust RESTful API...",
+    hasPricing: false,
+    features: ["Bulk SMS", "Transactional OTP", "API Integration"],
+    link: "#"
   },
+  {
+    id: 5,
+    category: "HEALTHCARE",
+    badge: "COMING SOON",
+    title: "Arogya CMS",
+    subtitle: "Clinic Management System.",
+    bannerImage: "/product/aarogya.png",
+    description: "An offline-capable clinic management system for medical practices, healthcare centers, and outpatient clinics — built for fast patient billing,...",
+    hasPricing: false,
+    features: ["Offline Billing", "Barcode Scanning", "Medical Inventory"],
+    link: "#"
+  }
 ];
 
-export default function OurProducts() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
-
-  const toggleItem = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
-
-  const handleProductSelect = (index: number) => {
-    setOpenIndex(index);
-  };
-
+export default function ProductShowcase() {
   return (
-    <section id="our_works" className="relative w-full bg-white text-purple-100 py-24 px-4 sm:px-6 md:px-12 lg:px-20 overflow-hidden font-sans border-y border-purple-500/20 selection:bg-purple-600 selection:text-white">
+
+
+    <section id="products" className="relative w-full bg-[#0b0217] text-purple-100 py-20 px-4 sm:px-6 md:px-12 lg:px-20 overflow-hidden font-sans  selection:bg-purple-600 selection:text-white">
       <div
-        className="absolute inset-0 opacity-20 pointer-events-none z-0"
+        className="absolute inset-0 pointer-events-none opacity-20 z-0"
         style={{
-          backgroundImage: `radial-gradient(rgba(192, 132, 252, 0.35) 1px, transparent 1px)`,
-          backgroundSize: '28px 28px',
+          backgroundImage: 'radial-gradient(rgba(192, 132, 252, 0.35) 1px, transparent 1px)',
+          backgroundSize: '28px 28px'
         }}
       />
- 
-      <div className="absolute inset-0 flex items-start justify-center pointer-events-none select-none z-0 overflow-hidden opacity-10">
-        <span className="text-[20vw] font-black uppercase tracking-widest bg-clip-text text-transparent bg-gradient-to-b from-purple-400 to-purple-950 whitespace-nowrap">
-          IMPACT
+
+
+      <div className="absolute inset-0 flex items-start justify-center pointer-events-none select-none z-0 overflow-hidden opacity-5">
+        <span className="text-[16vw] font-black uppercase tracking-widest bg-clip-text text-transparent bg-gradient-to-b from-purple-400 to-purple-950 whitespace-nowrap">
+          Products
         </span>
       </div>
 
-      <div className="max-w-7xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-     
-        <div className="lg:col-span-5 space-y-6 lg:sticky lg:top-28 h-fit">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-[#993EEB] ">
-            <span className="h-[3px] w-6 bg-[#993EEB]" />
-            <span className="text-xs font-bold tracking-widest uppercase">OUR PORTFOLIO</span>
+      <div className="max-w-7xl mx-auto relative z-10 space-y-8">
+
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 pb-4">
+          <div className="space-y-4 max-w-2xl">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-[#eae9eb] shadow-inner">
+              <span className="h-[3px] w-8 bg-[#993EEB]"></span>
+              <span className="text-xs font-bold tracking-widest uppercase">Our Products</span>
+            </div>
+
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight text-white">
+              Digital
+              <span className="bg-violet-400  bg-clip-text text-transparent"> Solutions
+              </span>
+              <br />
+              <span className="text-white/60">For the future.</span>
+            </h2>
+
+            <p className="text-purple-200/80 text-sm sm:text-base leading-relaxed">
+              From restaurant management to retail POS, AI solutions, our products are designed to handle business operations fast, reliably, and with seamless user experiences.
+            </p>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight text-[#1a1033]">
-            Our Works <br />
-            <span className="text-[#8b5cf6]">
-              That Deliver
-            </span>
-            <br/>
-            <span className="text-[#a3a3c2]"> Real Impact.</span>
-          </h2>
-
-          <p className="text-slate-600 text-sm sm:text-base leading-relaxed max-w-lg">
-            Discover how we&apos;ve helped ambitious startups, political figures, and enterprise clients transform their digital presence through tailored technological solutions.
-          </p>
 
         </div>
 
-       
-        <div className="lg:col-span-7 space-y-4">
-          {PRODUCTS_DATA.map((product, index) => {
-            const isOpen = openIndex === index;
+      </div>
 
-            return (
-              <div  key={product.id}  className={`bg-[#e6dde9] transition-all duration-300 rounded-2xl border overflow-hidden ${
-                  isOpen ? ' shadow-[0_0_25px_rgba(153,62,235,0.2)]' : ' hover:bg-[#e6dde9]/40 border-purple-500/20 hover:border-purple-500/40'
-                }`}
-              >
 
-                <button
-                  type="button"
-                  onClick={() => toggleItem(index)}
-                  className="flex items-center justify-between py-5 px-6 w-full text-black/60 text-left cursor-pointer group"
-                >
-                  <div className="flex items-center gap-4">
-                    <span className="text-xs font-mono font-bold  bg-white px-2.5 py-1 rounded-lg border border-purple-500/30">
-                      0{product.id}
-                    </span>
-                    <h3 className="text-base sm:text-lg font-bold  transition-colors">
+      <div className="min-h-screen p-6 md:p-12 text-white ">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {PRODUCTS.map((product, index) => (
+            <motion.div
+              key={product.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="relative bg-gradient-to-b from-[#16102f] to-[#0d0922] rounded-3xl border border-purple-900/20 shadow-2xl  flex flex-col justify-between group overflow-hidden"
+            >
+
+              <div className="absolute -top-24 -right-24 w-48 h-48 bg-purple-600/10 rounded-full blur-3xl group-hover:bg-purple-500/20 transition-all duration-500 pointer-events-none" />
+
+              <div>
+
+                <div className="relative h-44 w-full overflow-hidden bg-purple-950/40 flex items-center justify-center">
+               {product.bannerImage ? (
+                  <div className="relative w-full h-full group-hover:scale-105 transition-transform duration-500 ease-out">
+                    <Image
+                      src={product.bannerImage}
+                      alt={product.title}
+                      fill
+                      className="object-cover "
+                      sizes="(max-width: 768px) 100vw, 112px"
+                      priority={index < 3}
+                    />
+                  </div>
+                ) : (
+                  <div className="w-full h-full bg-gradient-to-tr from-purple-900/60 via-purple-950 to-indigo-950 flex flex-col items-center justify-center p-4 relative">
+                    <div className="w-12 h-12 rounded-2xl bg-purple-600/20 border border-purple-400/30 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                      <Layers className="w-6 h-6 text-purple-300" />
+                    </div>
+                    <span className="text-xs font-bold tracking-wider text-purple-200/80 uppercase">
                       {product.title}
-                    </h3>
+                    </span>
+                  </div>
+                )}
+
+                  {/* Styled Geometric Fallback Container */}
+                  <div
+                    className={`w-full h-full bg-gradient-to-tr from-purple-900/60 via-purple-950 to-indigo-950 flex flex-col items-center justify-center p-4 relative ${product.bannerImage ? 'hidden' : 'flex'
+                      }`}
+                  >
+                    <div className="w-12 h-12 rounded-2xl bg-purple-600/20 border border-purple-400/30 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                      <Layers className="w-6 h-6 text-purple-300" />
+                    </div>
+                    <span className="text-xs font-bold tracking-wider text-purple-200/80 uppercase">
+                      {product.title}
+                    </span>
                   </div>
 
-                  <div className="flex items-center gap-3">
-                    <span className="hidden sm:inline-block px-3 py-1 rounded-full text-[11px] font-semibold bg-white border border-purple-500/20">
+                  {/* Gradient Overlay for Smooth Visual Flow */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#16102f] via-transparent to-black/30 pointer-events-none" />
+
+                  {/* Top Category Badge over Banner */}
+                  <div className="absolute top-4 left-4 right-4 flex items-center justify-between gap-2 z-10">
+                    <span className="text-[10px] font-extrabold tracking-widest text-purple-200 uppercase bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-purple-500/30">
                       {product.category}
                     </span>
-                    <div
-                      className={`p-1.5 rounded-full transition-transform duration-300 ${
-                        isOpen ? 'rotate-180 bg-purple-800 text-white' : 'bg-white text-purple-300'
-                      }`}
-                    >
-                      <ChevronDown className="w-4 h-4" />
-                    </div>
+                    {product.badge && (
+                      <span
+                        className={`px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider shadow-md flex items-center gap-1 backdrop-blur-md ${product.badge.includes("OFF")
+                            ? "bg-gradient-to-r from-amber-500 to-orange-500 text-black animate-pulse"
+                            : "bg-purple-600/90 text-white border border-purple-400/40"
+                          }`}
+                      >
+                        {product.badge}
+                      </span>
+                    )}
                   </div>
-                </button>
+                </div>
 
-                <AnimatePresence initial={false}>
-                  {isOpen && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.35, ease: 'easeInOut' }}
-                      className="overflow-hidden border-t border-purple-500/20"
-                    >
-                      <div className="p-6 space-y-4">
-                        <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-purple-300/80">
-                          <div className="flex items-center gap-2 text-black/60 font-semibold">
-                            <span>Client -</span>
-                            <span className="font-semibold text-gray-600">{product.client}</span>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <span className="font-semibold text-gray-600">{product.serviceDate}</span>
-                          </div>
-                        </div>
+                {/* Card Body Details */}
+                <div className="p-6 pt-4">
+                  <h2 className="text-2xl font-black tracking-tight text-white group-hover:text-purple-400 transition-colors">
+                    {product.title}
+                  </h2>
+                  <p className="text-xs font-semibold text-purple-200/70 mt-1">
+                    {product.subtitle}
+                  </p>
 
-                        <p className="text-sm sm:text-base leading-relaxed text-gray-600 max-w-xl  font-normal">
-                          {product.description}
-                        </p>
+                  <p className="text-xs text-gray-300/80 mt-3 leading-relaxed">
+                    {product.description}
+                  </p>
 
-                        <div className="relative w-2/3 h-56 sm:h-64 rounded-xl overflow-hidden border border-purple-500/30 bg-white">
-                          <Image
-                            src={product.banner}
-                            alt={product.title}
-                            fill
-                            sizes="(max-width: 500px) 30vw, 20vw"
-                            className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-[#0b0217] via-transparent to-transparent opacity-80" />
-                          
-                          {product.previewUrl && (
-                            <a
-                              href={product.previewUrl}
-                              target="_blank"
-                              rel="noreferrer"
-                              className="absolute bottom-4 right-4 px-3.5 py-1.5 rounded-lg bg-purple-900/90 hover:bg-purple-800 text-white text-xs font-semibold flex items-center gap-1.5 border border-purple-400/40 shadow-lg backdrop-blur-md transition-colors"
-                            >
-                              <span>Live Preview</span>
-                              <ExternalLink className="w-3.5 h-3.5" />
-                            </a>
-                          )}
-                        </div>
-
-                        <div className="space-y-2 pt-2">
-                          <div className="flex items-center gap-1.5 text-xs font-semibold text-black/80">
-                            <span>Technologies </span>
-                          </div>
-                          <div className="flex flex-wrap gap-2">
-                            {product.tools.map((tool, idx) => (
-                              <span
-                                key={idx}
-                                className="px-3 py-1 rounded-md text-xs font-mono font-medium bg-white border border-purple-500/30 text-gray-800"
-                              >
-                                {tool}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
+                  {/* Festive Pricing Box */}
+                  {product.hasPricing && (
+                    <div className="my-5 p-4 rounded-2xl bg-gradient-to-br from-amber-500/10 via-purple-900/20 to-purple-950/40 border border-amber-500/30 relative">
+                      <div className="text-[10px] font-bold text-amber-400 tracking-wider flex items-center gap-1">
+                        <Tag className="w-3 h-3" />
+                        {product.tag}
                       </div>
-                    </motion.div>
+                      <div className="flex items-baseline gap-2 mt-1">
+                        <span className="text-xs text-gray-400 line-through font-mono">
+                          {product.originalPrice}
+                        </span>
+                        <span className="text-lg font-extrabold text-amber-300 font-mono">
+                          {product.currentPrice}
+                        </span>
+                      </div>
+                      <div className="text-[10px] text-purple-300 font-medium mt-1">
+                        {product.savings}
+                      </div>
+                    </div>
                   )}
-                </AnimatePresence>
+
+                  {/* Feature Tags */}
+                  <div className="flex flex-wrap gap-1.5 my-5">
+                    {product.features.map((feat, i) => (
+                      <span
+                        key={i}
+                        className="px-2.5 py-1 rounded-xl text-[11px] font-medium bg-purple-950/60 text-purple-200 border border-purple-500/20 flex items-center gap-1"
+                      >
+                        <CheckCircle2 className="w-3 h-3 text-purple-400 shrink-0" />
+                        {feat}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               </div>
-            );
-          })}
 
-      
-          <div className="pt-4 flex items-center justify-between">
-            <div className="text-xs font-mono text-gray-700/70">
-              Select product to expand view
-            </div>
-
-            <div className="flex items-center gap-2">
-              {PRODUCTS_DATA.map((service, index) => (
-                <button
-                  key={service.id}
-                  type="button"
-                  onClick={() => handleProductSelect(index)}
-                  aria-label={`Show ${service.title}`}
-                  className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
-                    index === openIndex
-                      ? 'w-8 bg-purple-500 shadow-md shadow-purple-500/30'
-                      : 'w-2.5 bg-purple-900/60 hover:bg-purple-700/80 border border-purple-500/20'
-                  }`}
-                />
-              ))}
-            </div>
-          </div>
+              {/* Footer Action Link */}
+              <div className="px-6 pb-6 pt-4 border-t border-purple-900/40">
+                <a
+                  href={product.link}
+                  className="inline-flex items-center gap-2 text-xs font-bold text-purple-400 hover:text-purple-300 transition-colors group-hover:translate-x-1 duration-200"
+                >
+                  <span>Read Full Details</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </a>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
+
     </section>
+
+
+
+
   );
 }

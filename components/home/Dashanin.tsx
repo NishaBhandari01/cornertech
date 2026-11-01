@@ -78,30 +78,38 @@ export const DashainBanner: React.FC = () => {
             <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-purple-600/15 rounded-full blur-[120px] pointer-events-none" />
             <div className="absolute top-10 left-10 w-72 h-72 bg-amber-500/10 rounded-full blur-[100px] pointer-events-none" />
 
-            <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                {[...Array(12)].map((_, i) => (
-                    <motion.div
-                        key={i}
-                        className="absolute rounded-full bg-amber-300/40"
-                        style={{
-                            width: Math.random() * 4 + 4 + 'px',
-                            height: Math.random() * 4 + 4 + 'px',
-                            top: Math.random() * 100 + '%',
-                            left: Math.random() * 100 + '%',
-                        }}
-                        animate={{
-                            y: [0, -30, 0],
-                            opacity: [0.2, 0.8, 0.2],
-                        }}
-                        transition={{
-                            duration: 4 + Math.random() * 3,
-                            repeat: Infinity,
-                            ease: 'easeInOut',
-                        }}
-                    />
-                ))}
-            </div>
 
+            <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                {Array.from({ length: 12 }).map((_, i) => {
+
+                    const size = 4 + ((i * 7) % 4);
+                    const top = (i * 37 + 13) % 100;
+                    const left = (i * 53 + 17) % 100;
+                    const duration = 4 + (i % 3);
+
+                    return (
+                        <motion.div
+                            key={i}
+                            className="absolute rounded-full bg-amber-300/40"
+                            style={{
+                                width: `${size}px`,
+                                height: `${size}px`,
+                                top: `${top}%`,
+                                left: `${left}%`,
+                            }}
+                            animate={{
+                                y: [0, -30, 0],
+                                opacity: [0.2, 0.8, 0.2],
+                            }}
+                            transition={{
+                                duration,
+                                repeat: Infinity,
+                                ease: 'easeInOut',
+                            }}
+                        />
+                    );
+                })}
+            </div>
 
             <div className="max-w-7xl mx-auto relative mt-10 z-10 space-y-12">
 

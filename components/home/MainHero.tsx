@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { ArrowUpRight, Code2, Lightbulb } from 'lucide-react';
 import Image from 'next/image';
-import CornorTechLogoAnimation from '../loading/page';
+import ParchmentCapabilities from './ParchmentCapabilities';
 
 
 const AnimatedKite = ({
@@ -200,69 +200,7 @@ export default function HeroSection() {
                         </motion.div>
                     </div>
 
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 0.8, delay: 0.3 }}
-                        className="lg:col-span-3 flex flex-col justify-end items-start lg:items-end space-y-1.5 pb-2 pl-4 lg:pl-0 lg:pr-4"
-                    >
-                        <span className="text-[11px] font-mono tracking-widest text-purple-400 uppercase font-bold z-10">
-                            OUR CAPABILITIES
-                        </span>
-
-                        {/* Mask container to hide overflowing scrolling text */}
-                        <div className="h-28 overflow-hidden relative w-full flex flex-col justify-end items-start lg:items-end">
-                            <motion.div
-                                animate={{ y: ['0%', '-50%'] }}
-                                transition={{
-                                    duration: 12,
-                                    repeat: Infinity,
-                                    ease: 'linear',
-                                }}
-                                className="flex flex-col space-y-1.5 items-start lg:items-end"
-                            >
-                                {/* First Set of Items */}
-                                <span className="text-[9px] font-mono tracking-wider text-purple-200/80 uppercase hover:text-white transition-colors cursor-pointer">
-                                    Web Development
-                                </span>
-                                <span className="text-[9px] font-mono tracking-wider text-purple-200/80 uppercase hover:text-white transition-colors cursor-pointer">
-                                    DIGITAL MARKETING
-                                </span>
-                                <span className="text-[9px] font-mono tracking-wider text-purple-200/80 uppercase hover:text-white transition-colors cursor-pointer">
-                                    GRAPHIC DESIGN
-                                </span>
-                                <span className="text-[9px] font-mono tracking-wider text-purple-200/80 uppercase hover:text-white transition-colors cursor-pointer">
-                                    MOBILE APP DEV
-                                </span>
-                                <span className="text-[9px] font-mono tracking-wider text-purple-200/80 uppercase hover:text-white transition-colors cursor-pointer">
-                                    Content Creation
-                                </span>
-                                <span className="text-[9px] font-mono tracking-wider text-purple-200/80 uppercase hover:text-white transition-colors cursor-pointer">
-                                    cloud Solution
-                                </span>
-
-
-                                <span className="text-[9px] font-mono tracking-wider text-purple-200/80 uppercase hover:text-white transition-colors cursor-pointer">
-                                    Web Development
-                                </span>
-                                <span className="text-[9px] font-mono tracking-wider text-purple-200/80 uppercase hover:text-white transition-colors cursor-pointer">
-                                    DIGITAL MARKETING
-                                </span>
-                                <span className="text-[9px] font-mono tracking-wider text-purple-200/80 uppercase hover:text-white transition-colors cursor-pointer">
-                                    GRAPHIC DESIGN
-                                </span>
-                                <span className="text-[9px] font-mono tracking-wider text-purple-200/80 uppercase hover:text-white transition-colors cursor-pointer">
-                                    MOBILE APP DEV
-                                </span>
-                                <span className="text-[9px] font-mono tracking-wider text-purple-200/80 uppercase hover:text-white transition-colors cursor-pointer">
-                                    Content Creation
-                                </span>
-                                <span className="text-[9px] font-mono tracking-wider text-purple-200/80 uppercase hover:text-white transition-colors cursor-pointer">
-                                    cloud Solution
-                                </span>
-                            </motion.div>
-                        </div>
-                    </motion.div>
+                     <ParchmentCapabilities/>
 
                 </div>
             </div>
@@ -310,7 +248,7 @@ export default function HeroSection() {
                     >
                         <div className="absolute inset-0 z-0 opacity-40 group-hover:opacity-50 transition-opacity duration-500">
                             <Image
-                                src="/hero-second.jpg"
+                                src="/hero_workspace.webp"
                                 alt="Cornor Tech Workstation"
                                 fill
                                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -321,14 +259,13 @@ export default function HeroSection() {
                         </div>
 
 
-                        {/* Top Availability Badge */}
                         <div className="relative z-10 flex items-center justify-between">
                             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-950/80 border border-emerald-500/40 text-emerald-300 text-xs font-medium backdrop-blur-md">
                                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                                 Available for new projects
                             </div>
 
-                            {/* Play / Action Floating Button */}
+
                             <motion.button
                                 whileHover={{ scale: 1.15, rotate: 45 }}
                                 whileTap={{ scale: 0.95 }}
@@ -338,7 +275,7 @@ export default function HeroSection() {
                             </motion.button>
                         </div>
 
-                        {/* Center Overlay Text */}
+
                         <div className="relative z-10 mt-12">
                             <h3 className="text-xl sm:text-2xl font-bold text-white max-w-lg leading-snug drop-shadow-md">
                                 We help businesses scale delivery with accountable, structured tech teams.
@@ -346,10 +283,10 @@ export default function HeroSection() {
                         </div>
                     </motion.div>
 
-                    {/* RIGHT COLUMN: CARDS 3 & 4 STACKED (Col span 3) */}
+         
                     <div className="md:col-span-3 flex flex-col gap-5">
 
-                        {/* CARD 3: PURPLE SERVICE MODEL CARD */}
+    
                         <motion.div
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -359,9 +296,8 @@ export default function HeroSection() {
                         >
                             <div className="flex items-center justify-between">
                                 <span className="text-[10px] font-mono tracking-widest text-purple-200 uppercase font-bold">SERVICE MODEL</span>
-                                <span className="text-2xl font-black text-purple-300/40">01</span>
                             </div>
-                            <h4 className="text-lg font-bold text-white mt-2 leading-tight">
+                            <h4 className="text-xl font-bold text-white mt-2 leading-tight">
                                 Fully Managed <span className="block text-purple-200 text-sm font-normal">Projects</span>
                             </h4>
                         </motion.div>

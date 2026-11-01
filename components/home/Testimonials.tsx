@@ -176,8 +176,8 @@ export default function TestimonialsShowcase() {
         />
 
 
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-0 overflow-hidden opacity-10">
-          <span className="text-[20vw] font-black uppercase tracking-widest bg-clip-text text-transparent bg-gradient-to-b from-purple-400 to-purple-950 whitespace-nowrap">
+        <div className="absolute inset-0 flex items-start justify-center pointer-events-none select-none z-0 overflow-hidden opacity-5">
+          <span className="text-[18vw] font-black uppercase tracking-widest bg-clip-text text-transparent bg-gradient-to-b from-purple-400 to-purple-950 whitespace-nowrap">
             VOICES
           </span>
         </div>

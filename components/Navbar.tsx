@@ -18,7 +18,7 @@ const navItems: NavItem[] = [
     { label: 'Services', href: '/#service', id: "services" },
     { label: 'About Us', href: '/#about', id: "about" },
     { label: 'Our Works', href: '/#our_works', id: "works" },
-    { label: 'Products', href: '/products', id: "products" },
+    { label: 'Products', href: '/#products', id: "products" },
     { label: 'Career', href: '/career', id: "career" },
 ];
 
@@ -122,7 +122,7 @@ export const Navbar: React.FC = () => {
                     <div className="hidden sm:flex items-center gap-4 pl-2 border-white/10">
                         {/* Social Icons */}
                         <motion.a
-                            href="https://facebook.com"
+                            href="https://www.facebook.com/cornortech"
                             target="_blank"
                             rel="noreferrer"
                             whileHover={{ scale: 1.15, y: -2 }}
@@ -136,7 +136,7 @@ export const Navbar: React.FC = () => {
                         </motion.a>
 
                         <motion.a
-                            href="https://instagram.com"
+                            href="https://www.instagram.com/cornor_tech/"
                             target="_blank"
                             rel="noreferrer"
                             whileHover={{ scale: 1.15, y: -2 }}
@@ -150,7 +150,7 @@ export const Navbar: React.FC = () => {
                         </motion.a>
 
                         <motion.a
-                            href="https://linkedin.com"
+                            href="https://www.linkedin.com/in/ramitcornorceo/"
                             target="_blank"
                             rel="noreferrer"
                             whileHover={{ scale: 1.15, y: -2 }}

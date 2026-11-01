@@ -153,7 +153,7 @@ export const TechStack: React.FC = () => {
         }}
       />
 
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-0 overflow-hidden">
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-10 overflow-hidden opacity-30">
         <span className="text-[14vw] font-black uppercase tracking-widest text-purple-950/40 whitespace-nowrap">
           TECHNOLOGY
         </span>

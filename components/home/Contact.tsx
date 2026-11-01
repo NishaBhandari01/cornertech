@@ -95,7 +95,7 @@ export default function Contact() {
                 >
                     <motion.div variants={itemVariants} className="lg:col-span-5 space-y-8">
                         <div className="space-y-4">
-                     
+
                             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
                                 Let's Build <br />
                                 <span className="bg-violet-400 bg-clip-text text-transparent">
@@ -239,7 +239,7 @@ export default function Contact() {
                 </motion.div>
             </section>
 
-   
+
             <motion.section
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -247,8 +247,8 @@ export default function Contact() {
                 transition={{ duration: 0.7, ease: "easeOut" }}
                 className="px-4 sm:px-6 lg:px-20 max-w-7xl mx-auto pt-16 z-10 relative"
             >
-                <div className="grid gap-8 overflow-hidden rounded-3xl bg-[#1c0a36]/90 border border-purple-900/30 p-6 md:p-10 lg:grid-cols-2 shadow-2xl backdrop-blur-md items-center">
-            
+                <div className="grid w-full grid-cols-1 gap-8 overflow-hidden rounded-3xl bg-[#1c0a36]/90 border border-purple-900/30 p-6 md:p-10 lg:grid-cols-[40%_60%] shadow-2xl backdrop-blur-md items-stretch">
+
                     <div className="flex flex-col justify-center space-y-6">
                         <div className="flex items-center gap-4">
                             <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl  border border-purple-900/30 flex items-center justify-center shrink-0 overflow-hidden shadow-inner">
@@ -292,13 +292,11 @@ export default function Contact() {
                         </motion.a>
                     </div>
 
-                    <div className="min-h-[380px]  overflow-hidden rounded shadow-inner">
+                    <div className="relative w-full min-w-0 min-h-[350px] lg:min-h-[400px] overflow-hidden rounded-2xl shadow-inner">
                         <iframe
                             title="Cornor Tech Pvt. Ltd Location"
                             src="https://maps.google.com/maps?q=Cornor+Tech,27.6600192,83.4629464&t=&z=16&ie=UTF8&iwloc=B&output=embed"
-                            width="100%"
-                            height="100%"
-                            style={{ minHeight: "380px", border: 0 }}
+                            className="absolute inset-0 w-full h-full border-0"
                             loading="lazy"
                             allowFullScreen
                             referrerPolicy="no-referrer-when-downgrade"

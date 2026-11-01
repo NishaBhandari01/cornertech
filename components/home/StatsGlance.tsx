@@ -127,8 +127,8 @@ export const StatsGlance: React.FC = () => {
         <div className="relative bg-[#180733]/90 rounded-3xl p-8 sm:p-12 md:p-16 shadow-2xl border border-purple-500/20 backdrop-blur-xl">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 z-30 pointer-events-auto">
             <div className="absolute -top-1 left-1/2 -translate-x-1/2 flex gap-12 z-40">
-              <div className="w-3.5 h-3.5 rounded-full bg-gradient-to-b from-amber-700 via-amber-600 to-amber-800   shadow-inner" />
-              <div className="w-3.5 h-3.5 rounded-full bg-gradient-to-b from-amber-700 via-amber-600 to-amber-800  shadow-inner" />
+              <div className="w-3.5 h-3.5 rounded-full bg-violet-500   shadow-inner" />
+              <div className="w-3.5 h-3.5 rounded-full bg-violet-500  shadow-inner" />
             </div>
 
             <motion.div
@@ -140,18 +140,15 @@ export const StatsGlance: React.FC = () => {
                 repeatType: "mirror",
                 ease: "easeInOut",
               }}
-              whileHover={{ rotate: [-8, 8, -4, 4, 0], scale: 1.05 }}
               className="flex flex-col items-center origin-top cursor-grab active:cursor-grabbing"
             >
   
               <div className="flex gap-14 h-12 relative">
              
-                <div className="w-1.5 h-full bg-gradient-to-b from-amber-700 via-amber-600 to-amber-800 rounded-full shadow-md relative overflow-hidden">
-                  <div className="absolute inset-0 bg-[repeating-linear-gradient(45deg,transparent,transparent_2px,rgba(0,0,0,0.4)_2px,rgba(0,0,0,0.4)_4px)]" />
+                <div className="w-1.5 h-full bg-violet-500 rounded-full shadow-md relative overflow-hidden">
                 </div>
 
-                <div className="w-1.5 h-full bg-gradient-to-b from-amber-700 via-amber-600 to-amber-800 rounded-full shadow-md relative overflow-hidden">
-                  <div className="absolute inset-0 bg-[repeating-linear-gradient(45deg,transparent,transparent_2px,rgba(0,0,0,0.4)_2px,rgba(0,0,0,0.4)_4px)]" />
+                <div className="w-1.5 h-full bg-violet-500 rounded-full shadow-md relative overflow-hidden">
                 </div>
               </div>
 

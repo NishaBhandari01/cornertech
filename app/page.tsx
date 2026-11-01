@@ -7,7 +7,8 @@ import { DashainBanner } from "@/components/home/Dashanin";
 import HeroSection from "@/components/home/MainHero";
 import { TechStack } from "@/components/home/TechStack";
 import TestimonialsShowcase from "@/components/home/Testimonials";
-import OurProducts from "@/components/products/Hero";
+import OurProducts from "@/components/our-work/Hero";
+import ProductShowcase from "@/components/products/Hero";
 
 import ServicesShowcase from "@/components/services/ServiceSection";
 
@@ -20,6 +21,7 @@ export default function Home() {
       <ServicesShowcase />
       <OurProducts/> 
       <TechStack />
+      <ProductShowcase/>
       <TestimonialsShowcase />
       <AboutUsHero />
       <LeadershipTeam />

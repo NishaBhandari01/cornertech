@@ -47,11 +47,7 @@ const bottomLinks: FooterLink[] = [
 
 export const Footer: React.FC = () => {
     return (
-        <footer className="relative text-white pt-16 pb-12 px-6 lg:px-16 overflow-hidden">
-
-            <div className="relative top-0 mb-10 translate-x-1/3 z-50">
-            </div>
-
+        <footer className="relative bg-[#110522] text-white pt-20 pb-12 px-6 lg:px-16 overflow-hidden">
             <div className="max-w-7xl mx-auto">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-10 pb-12">
                     <div className="lg:col-span-2 space-y-4">
@@ -100,7 +96,7 @@ export const Footer: React.FC = () => {
                         <ul className="space-y-3">
                             {servicesLinks.map((link) => (
                                 <li key={link.label}>
-                                    <Link href={link.href} className="text-sm text-slate-300 hover:text-purple-600 hover:scale-105 hover:font-semibold transition-all">
+                                    <Link href={link.href} className="text-sm text-slate-300 hover:text-gray-400 hover:scale-105  transition-all">
                                         {link.label}
                                     </Link>
                                 </li>
@@ -116,7 +112,7 @@ export const Footer: React.FC = () => {
                         <ul className="space-y-3">
                             {worksLinks.map((link) => (
                                 <li key={link.label}>
-                                    <Link href={link.href} className="text-sm text-slate-300 hover:text-purple-600 hover:scale-105 hover:font-semibold transition-all">
+                                    <Link href={link.href} className="text-sm text-slate-300 hover:text-gray-400 hover:scale-105 transition-all">
                                         {link.label}
                                     </Link>
                                 </li>
@@ -130,7 +126,7 @@ export const Footer: React.FC = () => {
                         <ul className="space-y-3">
                             {discoverLinks.map((link) => (
                                 <li key={link.label}>
-                                    <Link href={link.href} className="text-sm text-slate-300 hover:text-purple-600 hover:scale-105 hover:font-semibold transition-all">
+                                    <Link href={link.href} className="text-sm text-slate-300 hover:text-gray-400 hover:scale-105 transition-all">
                                         {link.label}
                                     </Link>
                                 </li>
@@ -144,7 +140,7 @@ export const Footer: React.FC = () => {
                         <ul className="space-y-3">
                             {aboutLinks.map((link) => (
                                 <li key={link.label}>
-                                    <Link href={link.href} className="text-sm text-slate-300 hover:text-purple-600 hover:scale-105 hover:font-semibold transition-all">
+                                    <Link href={link.href} className="text-sm text-slate-300 hover:text-gray-400 hover:scale-105  transition-all">
                                         {link.label}
                                     </Link>
                                 </li>
