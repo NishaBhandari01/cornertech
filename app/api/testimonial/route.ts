@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
             testimonialInput,
         };
 
-        // Validate all required fields
+
         for (const [key, value] of Object.entries(fields)) {
             if (typeof value !== "string" || !value.trim()) {
                 return NextResponse.json(
@@ -42,7 +42,7 @@ export async function POST(req: NextRequest) {
             }
         }
 
-        // Validate maximum lengths
+
         const limits: Record<string, number> = {
             name: 100,
             role: 100,

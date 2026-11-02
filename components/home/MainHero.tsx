@@ -170,9 +170,9 @@ export default function HeroSection() {
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-end">
                     <div className="lg:col-span-9 space-y-2">
                         <motion.h1
-                            initial={{ opacity: 0, x: -40 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                            initial={{ opacity: 0, x: -40,  y: "100%" }}
+                            animate={{ opacity: 1, x: 0, y: 0 }}
+                            transition={{ duration: 4, ease: [0.16, 1, 0.3, 1] }}
                             className="text-6xl sm:text-8xl md:text-9xl font-black tracking-tighter text-white leading-none uppercase drop-shadow-[0_10px_35px_rgba(0,0,0,0.8)]"
                         >
                             CORNOR
@@ -197,7 +197,7 @@ export default function HeroSection() {
                                 <motion.h1
                                     initial={{ y: "100%" }}
                                     animate={{ y: 0 }}
-                                    transition={{ duration: 5, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                                    transition={{ duration: 4, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
                                     className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tighter uppercase leading-none bg-white bg-clip-text text-transparent "
                                 >
                                     TECH <span className="text-purple-400/90 font-extrabold">PVT. LTD</span>
